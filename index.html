@@ -143,6 +143,13 @@
 
 .logo img.brand-logo { height: 42px; width: auto; display: block; }
 .topbar .logo img.brand-logo { height: 38px; }
+
+.modal-gallery { display: flex; flex-direction: column; }
+.thumbs { display: flex; gap: 8px; padding: 12px; flex-wrap: wrap; }
+.thumb-mini { width: 56px; height: 56px; border-radius: 8px; overflow: hidden; cursor: pointer; border: 2px solid transparent; }
+.thumb-mini.active { border-color: #FF6A00; }
+.thumb-mini img { width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 760px) { .modal-gallery { order: -1; } }
 </style>
 </head>
 <body>
@@ -230,13 +237,35 @@ function ProductCard({ p, onOpen, onAdd }) {
 
 function ProductModal({ p, onClose, onAdd }) {
   const [qty, setQty] = useState(1);
+  const [activeImg, setActiveImg] = useState(0);
   if (!p) return null;
   const out = p.quantite_stock <= 0;
+  // Liste des images : photo principale + galerie
+  const gallery = Array.isArray(p.galerie) ? p.galerie : [];
+  const allImages = [p.photo_url, ...gallery].filter(Boolean);
+  const hasPhotos = allImages.length > 0;
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <button className="modal-close" onClick={onClose}>✕</button>
-        <ProductImg p={p} className="modal-img" big />
+        <div className="modal-gallery">
+          {hasPhotos ? (
+            <div className="modal-img" style={{ background: "#fff" }}>
+              <img src={allImages[activeImg]} alt={p.nom} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+            </div>
+          ) : (
+            <ProductImg p={p} className="modal-img" big />
+          )}
+          {allImages.length > 1 && (
+            <div className="thumbs">
+              {allImages.map((url, idx) => (
+                <div key={idx} className={`thumb-mini ${idx === activeImg ? "active" : ""}`} onClick={() => setActiveImg(idx)}>
+                  <img src={url} alt="" />
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
         <div className="modal-info">
           <div className="modal-cat">{p.categorie}{p.segment === "B2B" ? " · Vente en gros" : ""}</div>
           <h2 className="modal-name">{p.nom}</h2>
