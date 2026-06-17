@@ -122,16 +122,66 @@ function Login({ onLogin }) {
   );
 }
 
+function ImageUploader({ label, multiple, value, onChange, toast }) {
+  const [busy, setBusy] = useState(false);
+  const handleFiles = async (files) => {
+    if (!files || !files.length) return;
+    setBusy(true);
+    try {
+      const urls = [];
+      for (const file of files) {
+        if (!file.type.startsWith("image/")) { toast("Fichier ignoré (pas une image)"); continue; }
+        if (file.size > 5 * 1024 * 1024) { toast(`${file.name} dépasse 5 Mo, ignoré`); continue; }
+        const ext = (file.name.split(".").pop() || "jpg").toLowerCase();
+        const path = `${Date.now()}-${Math.random().toString(36).slice(2,8)}.${ext}`;
+        const { error } = await sb.storage.from("produits").upload(path, file, { cacheControl: "3600", upsert: false });
+        if (error) { toast("Erreur upload : " + error.message); continue; }
+        const { data } = sb.storage.from("produits").getPublicUrl(path);
+        urls.push(data.publicUrl);
+      }
+      if (multiple) onChange([...(value || []), ...urls]);
+      else if (urls[0]) onChange(urls[0]);
+    } catch (e) { toast("Erreur : " + (e.message || e)); }
+    setBusy(false);
+  };
+  return (
+    <div className="field">
+      <label>{label}</label>
+      {!multiple && value && (
+        <div style={{ position: "relative", width: 90, height: 90, marginBottom: 8 }}>
+          <img src={value} style={{ width: 90, height: 90, objectFit: "cover", borderRadius: 10, border: "1px solid #E2E2E8" }} />
+          <button type="button" onClick={() => onChange("")} style={{ position: "absolute", top: -8, right: -8, background: "#C62828", color: "#fff", border: "none", borderRadius: "50%", width: 22, height: 22, cursor: "pointer", fontSize: 13 }}>×</button>
+        </div>
+      )}
+      {multiple && value && value.length > 0 && (
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 8 }}>
+          {value.map((url, idx) => (
+            <div key={idx} style={{ position: "relative", width: 70, height: 70 }}>
+              <img src={url} style={{ width: 70, height: 70, objectFit: "cover", borderRadius: 8, border: "1px solid #E2E2E8" }} />
+              <button type="button" onClick={() => onChange(value.filter((_, i) => i !== idx))} style={{ position: "absolute", top: -7, right: -7, background: "#C62828", color: "#fff", border: "none", borderRadius: "50%", width: 20, height: 20, cursor: "pointer", fontSize: 12 }}>×</button>
+            </div>
+          ))}
+        </div>
+      )}
+      <label style={{ display: "inline-block", background: "#F0F1F5", border: "1.5px dashed #C8C8D0", borderRadius: 10, padding: "10px 16px", cursor: busy ? "wait" : "pointer", fontSize: 13.5, fontWeight: 600, color: "#555" }}>
+        {busy ? "Téléversement…" : (multiple ? "+ Ajouter des photos" : "Choisir une image")}
+        <input type="file" accept="image/*" multiple={multiple} style={{ display: "none" }} disabled={busy}
+          onChange={(e) => { handleFiles(Array.from(e.target.files)); e.target.value = ""; }} />
+      </label>
+    </div>
+  );
+}
+
 function ProductForm({ p, onClose, onSaved, toast }) {
-  const blank = { id:"", nom:"", categorie:"BEAUTÉ & SOINS", segment:"B2C", prix:0, ancien_prix:0, remise:0, note:4.5, vendus:0, emoji:"📦", couleur:"#FF6A00", photo_url:"", quantite_stock:0, actif:true, renta:"ÉLEVÉE", recurrent:false };
-  const [f, setF] = useState(p || blank);
+  const blank = { id:"", nom:"", categorie:"BEAUTÉ & SOINS", segment:"B2C", prix:0, ancien_prix:0, remise:0, note:4.5, vendus:0, emoji:"📦", couleur:"#FF6A00", photo_url:"", galerie:[], quantite_stock:0, actif:true, renta:"ÉLEVÉE", recurrent:false };
+  const [f, setF] = useState(p ? { ...p, galerie: p.galerie || [] } : blank);
   const [busy, setBusy] = useState(false);
   const isNew = !p;
   const set = (k,v) => setF({...f, [k]: v});
   const save = async () => {
     if (!f.id || !f.nom) { toast("ID et nom obligatoires"); return; }
     setBusy(true);
-    const payload = { ...f, prix:+f.prix, ancien_prix:+f.ancien_prix, remise:+f.remise, note:+f.note, vendus:+f.vendus, quantite_stock:+f.quantite_stock };
+    const payload = { ...f, prix:+f.prix, ancien_prix:+f.ancien_prix, remise:+f.remise, note:+f.note, vendus:+f.vendus, quantite_stock:+f.quantite_stock, galerie: f.galerie || [] };
     const { error } = isNew
       ? await sb.from("produits").insert(payload)
       : await sb.from("produits").update(payload).eq("id", p.id);
@@ -158,10 +208,11 @@ function ProductForm({ p, onClose, onSaved, toast }) {
           <div className="field"><label>Ancien prix (0 = aucun)</label><input type="number" value={f.ancien_prix} onChange={(e)=>set("ancien_prix",e.target.value)} /></div>
           <div className="field"><label>Remise (%)</label><input type="number" value={f.remise} onChange={(e)=>set("remise",e.target.value)} /></div>
           <div className="field"><label>Stock</label><input type="number" value={f.quantite_stock} onChange={(e)=>set("quantite_stock",e.target.value)} /></div>
-          <div className="field"><label>Emoji</label><input value={f.emoji} onChange={(e)=>set("emoji",e.target.value)} /></div>
+          <div className="field"><label>Emoji (si pas de photo)</label><input value={f.emoji} onChange={(e)=>set("emoji",e.target.value)} /></div>
           <div className="field"><label>Note (0-5)</label><input type="number" step="0.1" value={f.note} onChange={(e)=>set("note",e.target.value)} /></div>
         </div>
-        <div className="field"><label>URL photo (facultatif)</label><input value={f.photo_url||""} onChange={(e)=>set("photo_url",e.target.value)} placeholder="https://…" /></div>
+        <ImageUploader label="Photo principale" multiple={false} value={f.photo_url} onChange={(v)=>set("photo_url",v)} toast={toast} />
+        <ImageUploader label="Galerie (photos du détail)" multiple={true} value={f.galerie} onChange={(v)=>set("galerie",v)} toast={toast} />
         <label style={{fontSize:13,fontWeight:600}}><input type="checkbox" checked={f.actif} onChange={(e)=>set("actif",e.target.checked)} /> Visible sur le site</label>
         <div className="row-actions">
           <button className="btn-ghost" onClick={onClose}>Annuler</button>
