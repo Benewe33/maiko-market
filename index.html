@@ -340,12 +340,12 @@ function CartDrawer({ open, items, onClose, setItems, onCheckout }) {
   );
 }
 
-function Checkout({ items, onClose, onDone }) {
+function Checkout({ items, profil, onClose, onDone }) {
   const [step, setStep] = useState("form");
-  const [nom, setNom] = useState("");
-  const [tel, setTel] = useState("");
+  const [nom, setNom] = useState(profil ? `${profil.prenom||""} ${profil.nom||""}`.trim() : "");
+  const [tel, setTel] = useState(profil?.telephone || "");
   const [ville, setVille] = useState("");
-  const [adresse, setAdresse] = useState("");
+  const [adresse, setAdresse] = useState(profil?.adresse_livraison || "");
   const [note, setNote] = useState("");
   const [pay, setPay] = useState("livraison");
   const [orderNum, setOrderNum] = useState(null);
@@ -472,9 +472,84 @@ function Checkout({ items, onClose, onDone }) {
   );
 }
 
+function AccountModal({ onClose, onAuth, sb }) {
+  const [mode, setMode] = useState("connexion");
+  const [f, setF] = useState({ prenom:"", nom:"", telephone:"", email:"", password:"", adresse_residence:"", adresse_livraison:"" });
+  const [err, setErr] = useState("");
+  const [busy, setBusy] = useState(false);
+  const set = (k,v) => setF({...f,[k]:v});
+
+  const inscrire = async () => {
+    setErr("");
+    if (!f.nom || !f.email || !f.password) { setErr("Nom, email et mot de passe obligatoires."); return; }
+    if (f.password.length < 6) { setErr("Mot de passe : au moins 6 caractères."); return; }
+    setBusy(true);
+    try {
+      const { data, error } = await sb.auth.signUp({ email: f.email, password: f.password });
+      if (error) throw error;
+      const uid = data.user?.id;
+      if (uid) {
+        await sb.from("profils").update({
+          role: "client", statut: "actif",
+          prenom: f.prenom, nom: f.nom, email: f.email, telephone: f.telephone,
+          adresse_residence: f.adresse_residence, adresse_livraison: f.adresse_livraison
+        }).eq("id", uid);
+      }
+      onAuth();
+      onClose();
+    } catch (e) { setErr(e.message || String(e)); }
+    setBusy(false);
+  };
+
+  const connecter = async () => {
+    setErr(""); setBusy(true);
+    const { error } = await sb.auth.signInWithPassword({ email: f.email, password: f.password });
+    setBusy(false);
+    if (error) { setErr("Identifiants incorrects."); return; }
+    onAuth(); onClose();
+  };
+
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="checkout" onClick={(e)=>e.stopPropagation()} style={{maxWidth:440}}>
+        <button className="modal-close" onClick={onClose}>✕</button>
+        <h2>{mode==="connexion" ? "Connexion" : "Créer un compte"}</h2>
+        <div className="sub">{mode==="connexion" ? "Accédez à votre compte client" : "Rejoignez MaïkoMarket"}</div>
+        {err && <div className="modal-tag" style={{background:"#FFEBEE",color:"#C62828",marginBottom:14}}>{err}</div>}
+        {mode==="inscription" && (
+          <React.Fragment>
+            <div className="field"><label>Prénom</label><input value={f.prenom} onChange={(e)=>set("prenom",e.target.value)} /></div>
+            <div className="field"><label>Nom</label><input value={f.nom} onChange={(e)=>set("nom",e.target.value)} /></div>
+            <div className="field"><label>Téléphone</label><input value={f.telephone} onChange={(e)=>set("telephone",e.target.value)} placeholder="+229 ..." /></div>
+          </React.Fragment>
+        )}
+        <div className="field"><label>Email</label><input type="email" value={f.email} onChange={(e)=>set("email",e.target.value)} /></div>
+        <div className="field"><label>Mot de passe</label><input type="password" value={f.password} onChange={(e)=>set("password",e.target.value)} /></div>
+        {mode==="inscription" && (
+          <React.Fragment>
+            <div className="field"><label>Adresse de résidence</label><input value={f.adresse_residence} onChange={(e)=>set("adresse_residence",e.target.value)} placeholder="Où vous habitez" /></div>
+            <div className="field"><label>Adresse de livraison</label><input value={f.adresse_livraison} onChange={(e)=>set("adresse_livraison",e.target.value)} placeholder="Où livrer vos colis" /></div>
+          </React.Fragment>
+        )}
+        <button className="buy-btn" disabled={busy} onClick={mode==="connexion"?connecter:inscrire}>
+          {busy ? "..." : (mode==="connexion" ? "Se connecter" : "Créer mon compte")}
+        </button>
+        <div style={{textAlign:"center",marginTop:14,fontSize:13.5}}>
+          {mode==="connexion"
+            ? <span>Pas de compte ? <a style={{color:"#FF6A00",cursor:"pointer",fontWeight:600}} onClick={()=>{setMode("inscription");setErr("");}}>S'inscrire</a></span>
+            : <span>Déjà inscrit ? <a style={{color:"#FF6A00",cursor:"pointer",fontWeight:600}} onClick={()=>{setMode("connexion");setErr("");}}>Se connecter</a></span>}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function App() {
   const [products, setProducts] = useState([]);
   const [cats, setCats] = useState(CATEGORIES);
+  const [user, setUser] = useState(null);
+  const [profil, setProfil] = useState(null);
+  const [accountOpen, setAccountOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [loadErr, setLoadErr] = useState("");
   const [search, setSearch] = useState("");
@@ -507,6 +582,17 @@ function App() {
       }
       setLoading(false);
     })();
+  }, []);
+
+  useEffect(() => {
+    const loadProfil = async (u) => {
+      if (!u) { setProfil(null); return; }
+      const { data } = await sb.from("profils").select("*").eq("id", u.id).single();
+      setProfil(data || null);
+    };
+    sb.auth.getSession().then(({ data }) => { setUser(data.session?.user || null); loadProfil(data.session?.user); });
+    const { data: sub } = sb.auth.onAuthStateChange((_e, s) => { setUser(s?.user || null); loadProfil(s?.user); });
+    return () => sub.subscription.unsubscribe();
   }, []);
 
   const addToCart = (p, qty = 1) => {
@@ -547,6 +633,13 @@ function App() {
             <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Rechercher parmi nos produits..." />
             <button className="search-btn">Rechercher</button>
           </div>
+          {user ? (
+            <button className="cart-icon" title="Mon compte" onClick={() => sb.auth.signOut()} style={{fontSize:14,fontWeight:600,color:"#FF6A00"}}>
+              {profil?.prenom || "Compte"} · Déconnexion
+            </button>
+          ) : (
+            <button className="cart-icon" style={{fontSize:14,fontWeight:600}} onClick={() => setAccountOpen(true)}>Connexion</button>
+          )}
           <button className="cart-icon" onClick={() => setCartOpen(true)}>
             🛒{cartCount > 0 && <span className="cart-count">{cartCount}</span>}
           </button>
@@ -642,7 +735,7 @@ function App() {
             <div className="logo"><img className="brand-logo" src="logo-maiko-couleur.png" alt="MaïkoMarket" style={{height:48}} /></div>
             <p className="foot-p">La plateforme de commerce international qui connecte les fabricants chinois aux commerçants et familles d'Afrique de l'Ouest.</p>
           </div>
-          <div><h4>Acheter</h4><p>Particuliers</p><p>Vente en gros</p><p>Ventes flash</p><p>Nouveautés</p></div>
+          <div><h4>Vendre &amp; Livrer</h4><p><a href="devenir-fournisseur.html" style={{color:"inherit",textDecoration:"none"}}>Devenir fournisseur</a></p><p><a href="devenir-cargo.html" style={{color:"inherit",textDecoration:"none"}}>Devenir transporteur</a></p><p><a href="admin.html" style={{color:"inherit",textDecoration:"none"}}>Espace admin</a></p></div>
           <div><h4>Aide</h4><p>Suivi de commande</p><p>Livraison &amp; douanes</p><p>Retours</p><p>Nous contacter</p></div>
           <div><h4>Paiement</h4><p>Mobile Money</p><p>Carte bancaire</p><p>Paiement à la livraison</p><p>Virement (gros volumes)</p></div>
         </div>
@@ -652,7 +745,8 @@ function App() {
       <ProductModal p={modal} onClose={() => setModal(null)} onAdd={addToCart} />
       <CartDrawer open={cartOpen} items={cart} onClose={() => setCartOpen(false)} setItems={setCart}
         onCheckout={() => { setCartOpen(false); setCheckout(true); }} />
-      {checkout && <Checkout items={cart} onClose={() => setCheckout(false)} onDone={() => setCart([])} />}
+      {checkout && <Checkout items={cart} profil={profil} onClose={() => setCheckout(false)} onDone={() => setCart([])} />}
+      {accountOpen && <AccountModal sb={sb} onClose={()=>setAccountOpen(false)} onAuth={()=>{}} />}
       {toast && <div className="toast">{toast}</div>}
     </div>
   );
