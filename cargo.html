@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="logo-maiko-icone.png">
+<title>Espace Transporteur — MaïkoMarket</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "Segoe UI", system-ui, sans-serif; background: #F0F1F5; color: #1A1A1A; }
+.login-wrap { min-height: 100vh; display: grid; place-items: center; background: linear-gradient(135deg,#1A1A1A,#3a1d10); padding: 20px; }
+.login-box { background: #fff; border-radius: 18px; padding: 36px; width: 100%; max-width: 380px; }
+.login-box .logo { display: flex; align-items: center; gap: 8px; justify-content: center; margin-bottom: 6px; }
+.logo-mark { background: linear-gradient(135deg,#FF6A00,#FF2D78); color: #fff; width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; font-size: 22px; font-weight: 700; }
+.logo-text { font-size: 22px; font-weight: 800; color: #FF6A00; }
+.logo-accent { color: #1A1A1A; }
+.login-box h1 { font-size: 17px; text-align: center; margin-bottom: 20px; color: #666; font-weight: 600; }
+.field { margin-bottom: 14px; }
+.field label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px; color: #444; }
+.field input { width: 100%; border: 1.5px solid #E2E2E8; border-radius: 10px; padding: 11px 13px; font-size: 14px; outline: none; }
+.field input:focus { border-color: #FF6A00; }
+.btn-primary { width: 100%; background: linear-gradient(135deg,#FF6A00,#FF2D78); color: #fff; border: none; padding: 13px; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; }
+.btn-primary:disabled { background: #ccc; cursor: not-allowed; }
+.err { background: #FFEBEE; color: #C62828; padding: 10px 12px; border-radius: 10px; font-size: 13px; margin-bottom: 14px; }
+.topbar { background: #1A1A1A; color: #fff; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; }
+.topbar .logo-text { color: #FF6A00; }
+.topbar .logo-accent { color: #fff; }
+.topbar .user { font-size: 13px; color: #aaa; display: flex; align-items: center; gap: 14px; }
+.logout { background: #333; color: #fff; border: none; padding: 7px 14px; border-radius: 8px; cursor: pointer; font-size: 13px; }
+.tabs { background: #fff; display: flex; gap: 4px; padding: 0 24px; border-bottom: 1px solid #E2E2E8; }
+.tab { background: none; border: none; padding: 16px 20px; font-size: 14px; font-weight: 600; color: #888; cursor: pointer; border-bottom: 3px solid transparent; }
+.tab.active { color: #FF6A00; border-bottom-color: #FF6A00; }
+.tab .badge { background: #FF2D78; color: #fff; font-size: 11px; border-radius: 10px; padding: 1px 7px; margin-left: 5px; }
+.content { padding: 24px; max-width: 1300px; margin: 0 auto; }
+.toolbar { display: flex; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; align-items: center; }
+.toolbar input, .toolbar select { border: 1.5px solid #E2E2E8; border-radius: 10px; padding: 9px 13px; font-size: 14px; outline: none; }
+.toolbar input { flex: 1; min-width: 200px; }
+.stat-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px,1fr)); gap: 14px; margin-bottom: 22px; }
+.stat-card { background: #fff; border-radius: 14px; padding: 18px; }
+.stat-card .lbl { font-size: 12.5px; color: #888; font-weight: 600; }
+.stat-card .val { font-size: 26px; font-weight: 800; margin-top: 4px; }
+table { width: 100%; background: #fff; border-radius: 14px; overflow: hidden; border-collapse: collapse; }
+th { text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: .5px; color: #999; padding: 13px 14px; border-bottom: 1px solid #EEE; }
+td { padding: 12px 14px; border-bottom: 1px solid #F2F2F4; font-size: 13.5px; vertical-align: middle; }
+tr:last-child td { border-bottom: none; }
+.thumb { width: 40px; height: 40px; border-radius: 8px; display: grid; place-items: center; font-size: 22px; overflow: hidden; }
+.thumb img { width: 100%; height: 100%; object-fit: cover; }
+.pill { font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 10px; display: inline-block; }
+.pill.b2c { background: #E3F2FD; color: #1565C0; }
+.pill.b2b { background: #1A1A1A; color: #fff; }
+.pill.ok { background: #E8F5E9; color: #2E7D32; }
+.pill.low { background: #FFF3E0; color: #E65100; }
+.pill.out { background: #FFEBEE; color: #C62828; }
+.pill.en_attente { background: #FFF8E1; color: #F57F17; }
+.pill.confirmee { background: #E3F2FD; color: #1565C0; }
+.pill.expediee { background: #EDE7F6; color: #5E35B1; }
+.pill.livree { background: #E8F5E9; color: #2E7D32; }
+.pill.annulee { background: #FFEBEE; color: #C62828; }
+.act-btn { background: #F0F1F5; border: none; padding: 6px 11px; border-radius: 8px; cursor: pointer; font-size: 12.5px; font-weight: 600; margin-right: 5px; }
+.act-btn:hover { background: #E2E2E8; }
+.stock-input { width: 70px; border: 1.5px solid #E2E2E8; border-radius: 8px; padding: 6px 8px; font-size: 13px; text-align: center; }
+.modal-bg { position: fixed; inset: 0; background: rgba(0,0,0,.5); display: grid; place-items: center; z-index: 100; padding: 16px; overflow-y: auto; }
+.modal-card { background: #fff; border-radius: 16px; padding: 26px; max-width: 480px; width: 100%; max-height: 92vh; overflow-y: auto; }
+.modal-card h2 { margin-bottom: 16px; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.row-actions { display: flex; gap: 10px; margin-top: 18px; }
+.btn-ghost { flex: 1; background: #F0F1F5; border: none; padding: 12px; border-radius: 10px; font-weight: 600; cursor: pointer; }
+.empty { text-align: center; color: #999; padding: 50px; }
+select.statut-sel { border: 1.5px solid #E2E2E8; border-radius: 8px; padding: 5px 8px; font-size: 12.5px; font-weight: 600; cursor: pointer; }
+.loading-screen { display: grid; place-items: center; min-height: 50vh; color: #888; }
+.spinner { width: 36px; height: 36px; border: 4px solid #FFE0CC; border-top-color: #FF6A00; border-radius: 50%; animation: spin .8s linear infinite; margin-bottom: 12px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.expand-row td { background: #FAFAFC; font-size: 13px; }
+.toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: #1A1A1A; color: #fff; padding: 12px 24px; border-radius: 24px; font-weight: 600; z-index: 200; }
+
+.logo img.brand-logo { height: 42px; width: auto; display: block; }
+.topbar .logo img.brand-logo { height: 38px; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script type="text/babel">
+const { useState, useEffect } = React;
+const sb = supabase.createClient("https://hvziqwjgnwkgutrdsify.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh2emlxd2pnbndrZ3V0cmRzaWZ5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE2OTIxMjAsImV4cCI6MjA5NzI2ODEyMH0.AYicxr7MC-ho8tzwjOUkfq4c7cDzCO_HZYiV2d5P0lk");
+const fmt = (n) => new Intl.NumberFormat("fr-FR").format(n||0) + " FCFA";
+const STATUTS = ["en_attente","confirmee","expediee","livree","annulee"];
+const STATUT_LBL = { en_attente:"En attente", confirmee:"Confirmée", expediee:"En transit", livree:"Livrée", annulee:"Annulée" };
+
+function Livraisons({ toast }) {
+  const [cmds,setCmds]=useState([]); const [lignes,setLignes]=useState({}); const [loading,setLoading]=useState(true);
+  const [expanded,setExpanded]=useState(null); const [filtre,setFiltre]=useState("a_livrer");
+  const load = async () => {
+    setLoading(true);
+    const { data } = await sb.from("commandes").select("*").order("numero",{ascending:false});
+    setCmds(data||[]); setLoading(false);
+  };
+  useEffect(()=>{load();},[]);
+  const loadLignes = async (id) => {
+    if (expanded===id){setExpanded(null);return;}
+    if (!lignes[id]){ const {data}=await sb.from("lignes_commande").select("*").eq("commande_id",id); setLignes(l=>({...l,[id]:data||[]})); }
+    setExpanded(id);
+  };
+  const setStatut = async (id,statut) => { await sb.from("commandes").update({statut}).eq("id",id); toast("Statut mis à jour"); load(); };
+  if (loading) return <div className="loading-screen"><div className="spinner"/>Chargement…</div>;
+  const aLivrer = cmds.filter(c=>c.statut==="confirmee"||c.statut==="expediee");
+  const filtered = filtre==="a_livrer" ? aLivrer : filtre==="tous" ? cmds : cmds.filter(c=>c.statut===filtre);
+  return (
+    <div>
+      <div className="stat-cards">
+        <div className="stat-card"><div className="lbl">À livrer</div><div className="val" style={{color:"#E65100"}}>{aLivrer.length}</div></div>
+        <div className="stat-card"><div className="lbl">En transit</div><div className="val">{cmds.filter(c=>c.statut==="expediee").length}</div></div>
+        <div className="stat-card"><div className="lbl">Livrées</div><div className="val" style={{color:"#2E7D32"}}>{cmds.filter(c=>c.statut==="livree").length}</div></div>
+      </div>
+      <div className="toolbar">
+        <select value={filtre} onChange={(e)=>setFiltre(e.target.value)}>
+          <option value="a_livrer">À livrer (confirmées + en transit)</option>
+          <option value="expediee">En transit</option>
+          <option value="livree">Livrées</option>
+          <option value="tous">Toutes</option>
+        </select>
+      </div>
+      {filtered.length===0 ? <div className="empty">Aucune commande dans cette catégorie.</div> :
+      <table>
+        <thead><tr><th>N°</th><th>Client</th><th>Téléphone</th><th>Adresse de livraison</th><th>Total</th><th>Statut</th><th></th></tr></thead>
+        <tbody>{filtered.map(c=>(
+          <React.Fragment key={c.id}>
+            <tr>
+              <td><b>#{c.numero}</b></td>
+              <td>{c.client_nom}</td>
+              <td>{c.client_tel}</td>
+              <td style={{maxWidth:240}}>{c.adresse_complete || c.client_adresse || c.client_ville || "—"}</td>
+              <td><b>{fmt(c.total)}</b></td>
+              <td>
+                <select className="statut-sel" value={c.statut} onChange={(e)=>setStatut(c.id,e.target.value)}>
+                  {STATUTS.map(s=><option key={s} value={s}>{STATUT_LBL[s]}</option>)}
+                </select>
+              </td>
+              <td><button className="act-btn" onClick={()=>loadLignes(c.id)}>{expanded===c.id?"▲":"▼ Détail"}</button></td>
+            </tr>
+            {expanded===c.id && (
+              <tr className="expand-row"><td colSpan="7">
+                <b>Produits :</b>
+                <ul style={{margin:"8px 0 0 18px"}}>{(lignes[c.id]||[]).map(l=><li key={l.id}>{l.quantite}× {l.produit_nom}</li>)}</ul>
+                {c.client_ville && <div style={{marginTop:8}}><b>Ville :</b> {c.client_ville}</div>}
+                {c.note_client && <div style={{marginTop:4}}><b>Note du client :</b> {c.note_client}</div>}
+              </td></tr>
+            )}
+          </React.Fragment>
+        ))}</tbody>
+      </table>}
+    </div>
+  );
+}
+
+function Login() {
+  const [email,setEmail]=useState(""); const [pwd,setPwd]=useState(""); const [err,setErr]=useState(""); const [busy,setBusy]=useState(false);
+  const go = async () => {
+    setErr(""); setBusy(true);
+    const { data, error } = await sb.auth.signInWithPassword({ email, password: pwd });
+    if (error) { setBusy(false); setErr("Identifiants incorrects."); return; }
+    const { data: prof } = await sb.from("profils").select("role,statut").eq("id", data.user.id).single();
+    setBusy(false);
+    if (!prof || prof.role!=="cargo") { setErr("Ce compte n'est pas un compte transporteur."); await sb.auth.signOut(); return; }
+    if (prof.statut==="en_attente") { setErr("Votre compte est en cours de validation."); await sb.auth.signOut(); return; }
+    if (prof.statut!=="actif") { setErr("Compte non actif. Contactez-nous."); await sb.auth.signOut(); return; }
+  };
+  return (
+    <div className="login-wrap"><div className="login-box">
+      <div className="logo"><img className="brand-logo" src="logo-maiko-couleur.png" style={{height:46}} alt=""/></div>
+      <h1>Espace Transporteur</h1>
+      {err && <div className="err">{err}</div>}
+      <div className="field"><label>Email</label><input type="email" value={email} onChange={(e)=>setEmail(e.target.value)} onKeyDown={(e)=>e.key==="Enter"&&go()}/></div>
+      <div className="field"><label>Mot de passe</label><input type="password" value={pwd} onChange={(e)=>setPwd(e.target.value)} onKeyDown={(e)=>e.key==="Enter"&&go()}/></div>
+      <button className="btn-primary" disabled={busy} onClick={go}>{busy?"Connexion…":"Se connecter"}</button>
+      <div style={{textAlign:"center",marginTop:14,fontSize:13.5}}>Pas de compte ? <a href="devenir-cargo.html" style={{color:"#FF6A00",fontWeight:600}}>S'inscrire</a></div>
+    </div></div>
+  );
+}
+
+function Dashboard({ profil, onLogout }) {
+  const [toastMsg,setToastMsg]=useState("");
+  const toast=(m)=>{setToastMsg(m);setTimeout(()=>setToastMsg(""),2000);};
+  return (
+    <div>
+      <div className="topbar">
+        <div className="logo" style={{display:"flex",alignItems:"center",gap:10}}><img className="brand-logo" src="logo-maiko-couleur.png" style={{height:34}} alt=""/><span style={{fontSize:13,color:"#888"}}>Espace Transporteur</span></div>
+        <div className="user">{profil.entreprise||profil.nom||profil.email}<button className="logout" onClick={onLogout}>Déconnexion</button></div>
+      </div>
+      <div className="content"><Livraisons toast={toast}/></div>
+      {toastMsg && <div className="toast">{toastMsg}</div>}
+    </div>
+  );
+}
+
+function App() {
+  const [session,setSession]=useState(undefined); const [profil,setProfil]=useState(null);
+  useEffect(()=>{
+    const check = async (s) => {
+      setSession(s);
+      if (s){ const {data}=await sb.from("profils").select("*").eq("id",s.user.id).single(); setProfil(data); }
+      else setProfil(null);
+    };
+    sb.auth.getSession().then(({data})=>check(data.session));
+    const {data:sub}=sb.auth.onAuthStateChange((_e,s)=>check(s));
+    return ()=>sub.subscription.unsubscribe();
+  },[]);
+  if (session===undefined) return <div className="loading-screen"><div className="spinner"/></div>;
+  if (!session || !profil || profil.role!=="cargo" || profil.statut!=="actif") return <Login/>;
+  return <Dashboard profil={profil} onLogout={()=>sb.auth.signOut()}/>;
+}
+ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+</script>
+</body>
+</html>
