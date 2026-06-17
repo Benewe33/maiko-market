@@ -172,8 +172,8 @@ function ImageUploader({ label, multiple, value, onChange, toast }) {
   );
 }
 
-function ProductForm({ p, onClose, onSaved, toast }) {
-  const blank = { id:"", nom:"", categorie:"BEAUTÉ & SOINS", segment:"B2C", prix:0, ancien_prix:0, remise:0, note:4.5, vendus:0, emoji:"📦", couleur:"#FF6A00", photo_url:"", galerie:[], quantite_stock:0, actif:true, renta:"ÉLEVÉE", recurrent:false };
+function ProductForm({ p, onClose, onSaved, toast, cats }) {
+  const blank = { id:"", nom:"", categorie:(cats&&cats[0]?cats[0].nom:"BEAUTÉ & SOINS"), segment:"B2C", prix:0, ancien_prix:0, remise:0, note:4.5, vendus:0, emoji:"📦", couleur:"#FF6A00", photo_url:"", galerie:[], quantite_stock:0, actif:true, renta:"ÉLEVÉE", recurrent:false };
   const [f, setF] = useState(p ? { ...p, galerie: p.galerie || [] } : blank);
   const [busy, setBusy] = useState(false);
   const isNew = !p;
@@ -201,7 +201,7 @@ function ProductForm({ p, onClose, onSaved, toast }) {
         <div className="field"><label>Nom du produit</label><input value={f.nom} onChange={(e)=>set("nom",e.target.value)} /></div>
         <div className="field"><label>Catégorie</label>
           <select value={f.categorie} onChange={(e)=>set("categorie",e.target.value)} style={{width:"100%",padding:"11px 13px",borderRadius:10,border:"1.5px solid #E2E2E8"}}>
-            {["BEAUTÉ & SOINS","MODE & VÊTEMENTS","ÉLECTRONIQUE & HIGH-TECH","MAISON & CUISINE","OUTILS & CONSTRUCTION","AGRICULTURE & ÉLEVAGE","INDUSTRIE & ÉQUIPEMENTS","COMMERCE & DISTRIBUTION"].map(c=><option key={c}>{c}</option>)}
+            {(cats||[]).map(c=><option key={c.nom} value={c.nom}>{c.emoji} {c.nom}</option>)}
           </select></div>
         <div className="grid2">
           <div className="field"><label>Prix (FCFA)</label><input type="number" value={f.prix} onChange={(e)=>set("prix",e.target.value)} /></div>
@@ -225,13 +225,17 @@ function ProductForm({ p, onClose, onSaved, toast }) {
 
 function ProduitsTab({ toast }) {
   const [prods, setProds] = useState([]);
+  const [cats, setCats] = useState([]);
   const [loading, setLoading] = useState(true);
   const [q, setQ] = useState("");
   const [editing, setEditing] = useState(undefined); // undefined=closed, null=new, obj=edit
   const load = async () => {
     setLoading(true);
-    const { data } = await sb.from("produits").select("*").order("id");
-    setProds(data||[]); setLoading(false);
+    const [{ data: pData }, { data: cData }] = await Promise.all([
+      sb.from("produits").select("*").order("id"),
+      sb.from("categories").select("*").order("ordre")
+    ]);
+    setProds(pData||[]); setCats(cData||[]); setLoading(false);
   };
   useEffect(() => { load(); }, []);
   const del = async (p) => {
@@ -257,7 +261,7 @@ function ProduitsTab({ toast }) {
             <tr key={p.id}>
               <td><div className="thumb" style={{background:p.photo_url?"#fff":`${p.couleur}33`}}>{p.photo_url?<img src={p.photo_url}/>:p.emoji}</div></td>
               <td><b>{p.nom}</b><br/><span style={{color:"#aaa",fontSize:11}}>{p.id}</span></td>
-              <td style={{fontSize:11,color:"#888"}}>{p.categorie.split(" ")[0]}</td>
+              <td style={{fontSize:11,color:"#888"}}>{p.categorie}</td>
               <td><span className={`pill ${p.segment.toLowerCase()}`}>{p.segment}</span></td>
               <td>{fmt(p.prix)}</td>
               <td>{p.quantite_stock}</td>
@@ -271,7 +275,108 @@ function ProduitsTab({ toast }) {
           ))}
         </tbody>
       </table>
-      {editing !== undefined && <ProductForm p={editing} onClose={()=>setEditing(undefined)} onSaved={()=>{setEditing(undefined);load();}} toast={toast} />}
+      {editing !== undefined && <ProductForm p={editing} cats={cats} onClose={()=>setEditing(undefined)} onSaved={()=>{setEditing(undefined);load();}} toast={toast} />}
+    </div>
+  );
+}
+
+function CategoriesTab({ toast }) {
+  const [cats, setCats] = useState([]);
+  const [counts, setCounts] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [editing, setEditing] = useState(undefined); // undefined=closed, null=new, obj=edit
+  const load = async () => {
+    setLoading(true);
+    const { data: cData } = await sb.from("categories").select("*").order("ordre");
+    const { data: pData } = await sb.from("produits").select("categorie");
+    const c = {};
+    (pData||[]).forEach(p => { c[p.categorie] = (c[p.categorie]||0) + 1; });
+    setCats(cData||[]); setCounts(c); setLoading(false);
+  };
+  useEffect(()=>{ load(); },[]);
+  const del = async (cat) => {
+    const n = counts[cat.nom] || 0;
+    const msg = n > 0
+      ? `La catégorie "${cat.nom}" contient ${n} produit(s). En la supprimant, ces produits seront cachés du site (non supprimés). Continuer ?`
+      : `Supprimer la catégorie "${cat.nom}" ?`;
+    if (!confirm(msg)) return;
+    // Cacher les produits de cette catégorie
+    if (n > 0) {
+      await sb.from("produits").update({ actif: false }).eq("categorie", cat.nom);
+    }
+    const { error } = await sb.from("categories").delete().eq("id", cat.id);
+    if (error) { toast("Erreur : " + error.message); return; }
+    toast(n>0 ? `Catégorie supprimée, ${n} produit(s) caché(s)` : "Catégorie supprimée");
+    load();
+  };
+  if (loading) return <div className="loading-screen"><div className="spinner"/>Chargement…</div>;
+  return (
+    <div>
+      <div className="toolbar">
+        <span style={{color:"#888",fontSize:13.5,flex:1}}>Gérez les catégories affichées sur votre boutique.</span>
+        <button className="btn-primary" style={{width:"auto",padding:"9px 18px"}} onClick={()=>setEditing(null)}>+ Nouvelle catégorie</button>
+      </div>
+      <table>
+        <thead><tr><th></th><th>Catégorie</th><th>Couleur</th><th>Produits</th><th>Ordre</th><th>Actions</th></tr></thead>
+        <tbody>
+          {cats.map(c => (
+            <tr key={c.id}>
+              <td><div className="thumb" style={{background:`${c.couleur}33`,fontSize:24}}>{c.emoji}</div></td>
+              <td><b>{c.nom}</b></td>
+              <td><span style={{display:"inline-block",width:22,height:22,borderRadius:6,background:c.couleur,verticalAlign:"middle"}}></span> <span style={{fontSize:12,color:"#888"}}>{c.couleur}</span></td>
+              <td>{counts[c.nom]||0}</td>
+              <td>{c.ordre}</td>
+              <td style={{whiteSpace:"nowrap"}}>
+                <button className="act-btn" onClick={()=>setEditing(c)}>Modifier</button>
+                <button className="act-btn" onClick={()=>del(c)} style={{color:"#C62828"}}>Suppr.</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {editing !== undefined && <CategoryForm c={editing} onClose={()=>setEditing(undefined)} onSaved={()=>{setEditing(undefined);load();}} toast={toast} />}
+    </div>
+  );
+}
+
+function CategoryForm({ c, onClose, onSaved, toast }) {
+  const blank = { nom:"", emoji:"📦", couleur:"#FF6A00", ordre:99 };
+  const [f, setF] = useState(c || blank);
+  const [busy, setBusy] = useState(false);
+  const isNew = !c;
+  const set = (k,v) => setF({...f,[k]:v});
+  const save = async () => {
+    if (!f.nom.trim()) { toast("Le nom est obligatoire"); return; }
+    setBusy(true);
+    const payload = { nom:f.nom.trim(), emoji:f.emoji||"📦", couleur:f.couleur||"#FF6A00", ordre:+f.ordre||0 };
+    const { error } = isNew
+      ? await sb.from("categories").insert(payload)
+      : await sb.from("categories").update(payload).eq("id", c.id);
+    setBusy(false);
+    if (error) { toast(error.message.includes("duplicate") ? "Ce nom de catégorie existe déjà" : "Erreur : " + error.message); return; }
+    toast(isNew ? "Catégorie ajoutée" : "Catégorie modifiée");
+    onSaved();
+  };
+  return (
+    <div className="modal-bg" onClick={onClose}>
+      <div className="modal-card" onClick={(e)=>e.stopPropagation()} style={{maxWidth:420}}>
+        <h2>{isNew ? "Nouvelle catégorie" : "Modifier la catégorie"}</h2>
+        <div className="field"><label>Nom de la catégorie</label><input value={f.nom} onChange={(e)=>set("nom",e.target.value)} placeholder="ex: TÉLÉPHONIE" /></div>
+        <div className="grid2">
+          <div className="field"><label>Emoji</label><input value={f.emoji} onChange={(e)=>set("emoji",e.target.value)} placeholder="📱" /></div>
+          <div className="field"><label>Ordre d'affichage</label><input type="number" value={f.ordre} onChange={(e)=>set("ordre",e.target.value)} /></div>
+        </div>
+        <div className="field"><label>Couleur</label>
+          <div style={{display:"flex",alignItems:"center",gap:10}}>
+            <input type="color" value={f.couleur} onChange={(e)=>set("couleur",e.target.value)} style={{width:50,height:40,border:"1.5px solid #E2E2E8",borderRadius:8,cursor:"pointer"}} />
+            <input value={f.couleur} onChange={(e)=>set("couleur",e.target.value)} style={{flex:1}} />
+          </div>
+        </div>
+        <div className="row-actions">
+          <button className="btn-ghost" onClick={onClose}>Annuler</button>
+          <button className="btn-primary" disabled={busy} onClick={save}>{busy?"…":"Enregistrer"}</button>
+        </div>
+      </div>
     </div>
   );
 }
@@ -431,11 +536,13 @@ function Dashboard({ onLogout, email }) {
         <button className={`tab ${tab==="produits"?"active":""}`} onClick={()=>setTab("produits")}>📦 Produits</button>
         <button className={`tab ${tab==="commandes"?"active":""}`} onClick={()=>setTab("commandes")}>🧾 Commandes</button>
         <button className={`tab ${tab==="stock"?"active":""}`} onClick={()=>setTab("stock")}>📊 Stock</button>
+        <button className={`tab ${tab==="categories"?"active":""}`} onClick={()=>setTab("categories")}>🏷️ Catégories</button>
       </div>
       <div className="content">
         {tab==="produits" && <ProduitsTab toast={toast} />}
         {tab==="commandes" && <CommandesTab toast={toast} />}
         {tab==="stock" && <StockTab toast={toast} />}
+        {tab==="categories" && <CategoriesTab toast={toast} />}
       </div>
       {toastMsg && <div className="toast">{toastMsg}</div>}
     </div>

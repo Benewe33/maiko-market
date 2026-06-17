@@ -474,6 +474,7 @@ function Checkout({ items, onClose, onDone }) {
 
 function App() {
   const [products, setProducts] = useState([]);
+  const [cats, setCats] = useState(CATEGORIES);
   const [loading, setLoading] = useState(true);
   const [loadErr, setLoadErr] = useState("");
   const [search, setSearch] = useState("");
@@ -488,9 +489,21 @@ function App() {
 
   useEffect(() => {
     (async () => {
-      const { data, error } = await sb.from("produits").select("*").eq("actif", true);
-      if (error) { setLoadErr(error.message); setLoading(false); return; }
-      setProducts(data || []);
+      const [{ data: pData, error: pErr }, { data: cData }] = await Promise.all([
+        sb.from("produits").select("*").eq("actif", true),
+        sb.from("categories").select("*").order("ordre")
+      ]);
+      if (pErr) { setLoadErr(pErr.message); setLoading(false); return; }
+      setProducts(pData || []);
+      if (cData && cData.length) {
+        // Générer un libellé court à partir du nom complet
+        setCats(cData.map(c => ({
+          name: c.nom,
+          short: c.nom.split(/[ &]/)[0].charAt(0) + c.nom.split(/[ &]/)[0].slice(1).toLowerCase(),
+          emoji: c.emoji,
+          color: c.couleur
+        })));
+      }
       setLoading(false);
     })();
   }, []);
@@ -547,7 +560,7 @@ function App() {
 
       <nav className="catnav">
         <button className={activeCat === "Tout" ? "chip active" : "chip"} onClick={() => setActiveCat("Tout")}>🏠 Tout</button>
-        {CATEGORIES.map((c) => (
+        {cats.map((c) => (
           <button key={c.name} className={activeCat === c.name ? "chip active" : "chip"} onClick={() => setActiveCat(c.name)} style={activeCat === c.name ? { background: c.color, borderColor: c.color } : {}}>
             {c.emoji} {c.short}
           </button>
@@ -569,7 +582,7 @@ function App() {
                   <button className="hero-cta" onClick={() => setSort("promo")}>Voir les promotions 🔥</button>
                 </div>
                 <div className="hero-cards">
-                  {CATEGORIES.slice(0, 4).map((c) => (
+                  {cats.slice(0, 4).map((c) => (
                     <div key={c.name} className="hero-tile" style={{ background: `${c.color}` }} onClick={() => setActiveCat(c.name)}>
                       <span style={{ fontSize: 34 }}>{c.emoji}</span>
                       <span>{c.short}</span>
