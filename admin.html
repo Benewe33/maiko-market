@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="logo-maiko-icone.png">
 <title>MaïkoMarket — Administration</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -71,6 +72,9 @@ select.statut-sel { border: 1.5px solid #E2E2E8; border-radius: 8px; padding: 5p
 @keyframes spin { to { transform: rotate(360deg); } }
 .expand-row td { background: #FAFAFC; font-size: 13px; }
 .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: #1A1A1A; color: #fff; padding: 12px 24px; border-radius: 24px; font-weight: 600; z-index: 200; }
+
+.logo img.brand-logo { height: 42px; width: auto; display: block; }
+.topbar .logo img.brand-logo { height: 38px; }
 </style>
 </head>
 <body>
@@ -105,7 +109,7 @@ function Login({ onLogin }) {
   return (
     <div className="login-wrap">
       <div className="login-box">
-        <div className="logo"><span className="logo-mark">麦</span><span className="logo-text">Maïko<span className="logo-accent">Market</span></span></div>
+        <div className="logo"><img className="brand-logo" src="logo-maiko-couleur.png" alt="MaïkoMarket" style={{height:54}} /></div>
         <h1>Espace administrateur</h1>
         {err && <div className="err">{err}</div>}
         <div className="field"><label>Email</label>
@@ -369,7 +373,7 @@ function Dashboard({ onLogout, email }) {
   return (
     <div>
       <div className="topbar">
-        <div className="logo" style={{display:"flex",alignItems:"center",gap:8}}><span className="logo-mark">麦</span><span className="logo-text">Maïko<span className="logo-accent">Market</span></span><span style={{fontSize:13,color:"#888",marginLeft:8}}>Administration</span></div>
+        <div className="logo" style={{display:"flex",alignItems:"center",gap:10}}><img className="brand-logo" src="logo-maiko-couleur.png" alt="MaïkoMarket" style={{height:34}} /><span style={{fontSize:13,color:"#888"}}>Administration</span></div>
         <div className="user">{email}<button className="logout" onClick={onLogout}>Déconnexion</button></div>
       </div>
       <div className="tabs">

@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="logo-maiko-icone.png">
 <title>MaïkoMarket — Chine → Afrique de l'Ouest</title>
 <style>
 
@@ -139,6 +140,9 @@
 .stock-low { font-size: 11px; color: #E65100; font-weight: 700; }
 .stock-out { font-size: 11px; color: #C62828; font-weight: 700; }
 
+
+.logo img.brand-logo { height: 42px; width: auto; display: block; }
+.topbar .logo img.brand-logo { height: 38px; }
 </style>
 </head>
 <body>
@@ -494,8 +498,7 @@ function App() {
       <header className="topbar">
         <div className="topbar-inner">
           <div className="logo" onClick={() => { setActiveCat("Tout"); setSegment("Tout"); setSearch(""); }}>
-            <span className="logo-mark">麦</span>
-            <span className="logo-text">Maïko<span className="logo-accent">Market</span></span>
+            <img className="brand-logo" src="logo-maiko-couleur.png" alt="MaïkoMarket" />
           </div>
           <div className="searchbar">
             <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Rechercher parmi nos produits..." />
@@ -588,7 +591,7 @@ function App() {
       <footer className="footer">
         <div className="footer-grid">
           <div>
-            <div className="logo"><span className="logo-mark">麦</span><span className="logo-text">Maïko<span className="logo-accent">Market</span></span></div>
+            <div className="logo"><img className="brand-logo" src="logo-maiko-couleur.png" alt="MaïkoMarket" style={{height:48}} /></div>
             <p className="foot-p">La plateforme de commerce international qui connecte les fabricants chinois aux commerçants et familles d'Afrique de l'Ouest.</p>
           </div>
           <div><h4>Acheter</h4><p>Particuliers</p><p>Vente en gros</p><p>Ventes flash</p><p>Nouveautés</p></div>
