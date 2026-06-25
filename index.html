@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Easy Cars Import — Importation de véhicules & matériels agricoles</title>
+<title>Easy Cars Import Export — Import & export de véhicules, matériels agricoles et marchandises</title>
+<meta name="description" content="Easy Cars Import Export : importation de véhicules et matériels agricoles, et exportation de véhicules et marchandises depuis l'Afrique de l'Ouest vers le monde.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
@@ -28,40 +29,29 @@
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{font-family:var(--font-body);background:var(--paper);color:var(--char);
-    -webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background .4s,color .4s}
+  body{font-family:var(--font-body);background:var(--paper);color:var(--char);-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background .4s,color .4s}
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
   h1,h2,h3,.disp{font-family:var(--font-display);text-transform:uppercase;letter-spacing:.01em;line-height:1.02}
   .wrap{max-width:1240px;margin:0 auto;padding:0 24px}
-  .mono{font-family:var(--font-mono)}
   .eyebrow{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--red-bright);font-weight:700}
-
-  /* ---------- HEADER ---------- */
-  header{position:fixed;top:0;left:0;right:0;z-index:100;transition:.35s;
-    background:transparent;border-bottom:1px solid transparent}
-  header.solid{background:color-mix(in srgb,var(--paper) 88%,transparent);
-    backdrop-filter:blur(14px);border-bottom:1px solid var(--steel-2);box-shadow:var(--shadow)}
+  header{position:fixed;top:0;left:0;right:0;z-index:100;transition:.35s;background:transparent;border-bottom:1px solid transparent}
+  header.solid{background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--steel-2);box-shadow:var(--shadow)}
   .nav{display:flex;align-items:center;justify-content:space-between;height:74px}
-  .logo{display:flex;align-items:center;gap:11px;font-family:var(--font-display);font-weight:700;
-    font-size:1.32rem;text-transform:uppercase;letter-spacing:.02em;color:var(--char);text-decoration:none}
-  .logo .mark{width:38px;height:38px;border-radius:9px;background:linear-gradient(135deg,var(--red),var(--red-deep));
-    display:grid;place-items:center;color:#fff;font-weight:700;box-shadow:0 4px 14px rgba(139,0,0,.4);position:relative;overflow:hidden}
+  .logo{display:flex;align-items:center;gap:11px;font-family:var(--font-display);font-weight:700;font-size:1.26rem;text-transform:uppercase;letter-spacing:.02em;color:var(--char);text-decoration:none}
+  .logo .mark{width:38px;height:38px;border-radius:9px;background:linear-gradient(135deg,var(--red),var(--red-deep));display:grid;place-items:center;color:#fff;font-weight:700;box-shadow:0 4px 14px rgba(139,0,0,.4)}
   .logo .mark svg{width:22px;height:22px}
+  .logo small{display:block;font-family:var(--font-mono);font-size:.54rem;letter-spacing:.22em;color:var(--red-bright);margin-top:1px}
   header:not(.solid) .logo,header:not(.solid) .nav-links a{color:#fff}
-  .nav-links{display:flex;gap:30px;align-items:center}
-  .nav-links a{color:var(--char);text-decoration:none;font-size:.86rem;font-weight:600;
-    letter-spacing:.02em;position:relative;padding:6px 0;transition:.2s}
-  .nav-links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;
-    background:var(--red-bright);transition:width .25s}
+  header:not(.solid) .logo small{color:#ff8a8a}
+  .nav-links{display:flex;gap:26px;align-items:center}
+  .nav-links a{color:var(--char);text-decoration:none;font-size:.84rem;font-weight:600;letter-spacing:.02em;position:relative;padding:6px 0;transition:.2s}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--red-bright);transition:width .25s}
   .nav-links a:hover::after{width:100%}
   .nav-actions{display:flex;align-items:center;gap:14px}
-  .theme-btn{width:40px;height:40px;border-radius:10px;border:1px solid var(--steel-2);
-    background:transparent;cursor:pointer;display:grid;place-items:center;color:inherit;transition:.2s}
+  .theme-btn{width:40px;height:40px;border-radius:10px;border:1px solid var(--steel-2);background:transparent;cursor:pointer;display:grid;place-items:center;color:inherit;transition:.2s}
   header:not(.solid) .theme-btn{border-color:rgba(255,255,255,.3);color:#fff}
   .theme-btn:hover{background:color-mix(in srgb,var(--red) 12%,transparent)}
-  .btn{font-family:var(--font-display);text-transform:uppercase;font-weight:600;letter-spacing:.04em;
-    font-size:.84rem;padding:12px 22px;border-radius:10px;border:none;cursor:pointer;text-decoration:none;
-    display:inline-flex;align-items:center;gap:8px;transition:transform .15s,box-shadow .2s,background .2s}
+  .btn{font-family:var(--font-display);text-transform:uppercase;font-weight:600;letter-spacing:.04em;font-size:.84rem;padding:12px 22px;border-radius:10px;border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:transform .15s,box-shadow .2s,background .2s}
   .btn-red{background:linear-gradient(135deg,var(--red-bright),var(--red-deep));color:#fff;box-shadow:0 6px 18px rgba(139,0,0,.35)}
   .btn-red:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(139,0,0,.45)}
   .btn-ghost{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.35);backdrop-filter:blur(6px)}
@@ -71,170 +61,122 @@
   .burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px}
   .burger span{width:24px;height:2px;background:currentColor;transition:.3s}
   header:not(.solid) .burger{color:#fff}
-
-  /* ---------- HERO ---------- */
   .hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;background:var(--char)}
-  .hero-bg{position:absolute;inset:0;
-    background:linear-gradient(120deg,rgba(20,20,20,.94) 0%,rgba(20,20,20,.55) 55%,rgba(107,15,26,.5) 100%),
-    url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=2000&q=80');
-    background-size:cover;background-position:center;animation:slowzoom 22s ease-in-out infinite alternate}
+  .hero-bg{position:absolute;inset:0;background:linear-gradient(120deg,rgba(20,20,20,.94) 0%,rgba(20,20,20,.55) 55%,rgba(107,15,26,.5) 100%),url('https://images.unsplash.com/photo-1605745341112-85968b19335b?auto=format&fit=crop&w=2000&q=80');background-size:cover;background-position:center;animation:slowzoom 22s ease-in-out infinite alternate}
   @keyframes slowzoom{from{transform:scale(1)}to{transform:scale(1.08)}}
-  .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse 80% 70% at 50% 40%,#000,transparent)}
-  .hero-content{position:relative;z-index:2;color:#fff;max-width:760px}
+  .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse 80% 70% at 50% 40%,#000,transparent)}
+  .hero-content{position:relative;z-index:2;color:#fff;max-width:780px}
   .hero .eyebrow{color:#ff8a8a}
-  .hero h1{font-size:clamp(2.5rem,6vw,4.6rem);font-weight:700;margin:18px 0;color:#fff}
+  .hero h1{font-size:clamp(2.4rem,5.6vw,4.4rem);font-weight:700;margin:18px 0;color:#fff}
   .hero h1 .hl{color:transparent;-webkit-text-stroke:1.5px #ff6b6b;display:inline-block}
-  .hero p.sub{font-size:clamp(1rem,1.6vw,1.18rem);line-height:1.6;color:#d9d9d6;max-width:560px;margin-bottom:34px;font-weight:400}
+  .hero p.sub{font-size:clamp(1rem,1.6vw,1.18rem);line-height:1.6;color:#d9d9d6;max-width:580px;margin-bottom:34px;font-weight:400}
   .hero-btns{display:flex;gap:14px;flex-wrap:wrap}
   .reveal-up{opacity:0;transform:translateY(34px)}
   .hero.in .reveal-up{animation:up .8s cubic-bezier(.2,.7,.3,1) forwards}
-  .hero.in .reveal-up:nth-child(1){animation-delay:.05s}
-  .hero.in .reveal-up:nth-child(2){animation-delay:.18s}
-  .hero.in .reveal-up:nth-child(3){animation-delay:.32s}
-  .hero.in .reveal-up:nth-child(4){animation-delay:.46s}
+  .hero.in .reveal-up:nth-child(1){animation-delay:.05s}.hero.in .reveal-up:nth-child(2){animation-delay:.18s}.hero.in .reveal-up:nth-child(3){animation-delay:.32s}.hero.in .reveal-up:nth-child(4){animation-delay:.46s}
   @keyframes up{to{opacity:1;transform:none}}
-
-  /* odometer stat strip — the signature element */
-  .odo{position:absolute;bottom:0;left:0;right:0;z-index:3;
-    background:linear-gradient(180deg,transparent,rgba(10,10,10,.85));padding:26px 0 30px}
+  .odo{position:absolute;bottom:0;left:0;right:0;z-index:3;background:linear-gradient(180deg,transparent,rgba(10,10,10,.85));padding:26px 0 30px}
   .odo-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
   .odo-cell{display:flex;flex-direction:column;gap:4px}
-  .odo-num{font-family:var(--font-mono);font-weight:700;font-size:clamp(1.6rem,3vw,2.5rem);color:#fff;
-    letter-spacing:.04em;line-height:1}
+  .odo-num{font-family:var(--font-mono);font-weight:700;font-size:clamp(1.6rem,3vw,2.5rem);color:#fff;letter-spacing:.04em;line-height:1}
   .odo-num .u{color:var(--red-bright)}
   .odo-lbl{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:#9a9a95}
-
-  /* ---------- SECTIONS ---------- */
   section{position:relative}
   .pad{padding:96px 0}
-  .sec-head{margin-bottom:48px;max-width:680px}
+  .sec-head{margin-bottom:48px;max-width:700px}
   .sec-head h2{font-size:clamp(1.9rem,3.6vw,3rem);font-weight:700;margin:14px 0}
   .sec-head p{color:var(--muted);font-size:1.05rem;line-height:1.6}
-
-  /* two big category cards */
-  .cards2{display:grid;grid-template-columns:1fr 1fr;gap:26px}
-  .bigcard{position:relative;border-radius:var(--r);overflow:hidden;min-height:440px;display:flex;
-    align-items:flex-end;color:#fff;text-decoration:none;box-shadow:var(--shadow);isolation:isolate}
+  .flow{display:grid;grid-template-columns:1fr auto 1fr;gap:20px;align-items:stretch;margin-top:8px}
+  .flow-card{background:var(--steel);border:1px solid var(--steel-2);border-radius:var(--r);padding:26px 24px}
+  .flow-card .dir{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--red-bright);font-weight:700}
+  .flow-card h3{font-size:1.5rem;font-weight:700;margin:6px 0 8px}
+  .flow-card p{color:var(--muted);font-size:.92rem;line-height:1.55}
+  .flow-arrow{display:grid;place-items:center;color:var(--red-bright)}
+  .flow-arrow svg{width:34px;height:34px}
+  @media(max-width:760px){.flow{grid-template-columns:1fr}.flow-arrow{transform:rotate(90deg)}}
+  .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .bigcard{position:relative;border-radius:var(--r);overflow:hidden;min-height:420px;display:flex;align-items:flex-end;color:#fff;text-decoration:none;box-shadow:var(--shadow);isolation:isolate}
   .bigcard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .7s}
-  .bigcard::after{content:"";position:absolute;inset:0;z-index:-1;
-    background:linear-gradient(180deg,rgba(20,20,20,.1) 30%,rgba(20,20,20,.92) 100%)}
+  .bigcard::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(20,20,20,.1) 25%,rgba(20,20,20,.93) 100%)}
   .bigcard:hover img{transform:scale(1.07)}
-  .bigcard .bc-body{padding:32px}
-  .bigcard .tag{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.22em;color:#ff8a8a;text-transform:uppercase}
-  .bigcard h3{font-size:1.9rem;font-weight:700;margin:8px 0 6px}
-  .bigcard p{color:#d2d2cf;font-size:.95rem;margin-bottom:18px;max-width:340px}
-  .bc-link{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-display);font-weight:600;
-    text-transform:uppercase;font-size:.86rem;letter-spacing:.04em;color:#fff;
-    border-bottom:2px solid var(--red-bright);padding-bottom:3px}
+  .bigcard .bc-body{padding:30px}
+  .bigcard .tag{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.2em;color:#ff8a8a;text-transform:uppercase}
+  .bigcard h3{font-size:1.65rem;font-weight:700;margin:8px 0 6px}
+  .bigcard p{color:#d2d2cf;font-size:.92rem;margin-bottom:18px}
+  .bc-link{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-display);font-weight:600;text-transform:uppercase;font-size:.84rem;letter-spacing:.04em;color:#fff;border-bottom:2px solid var(--red-bright);padding-bottom:3px}
   .bc-link svg{transition:transform .2s}
   .bigcard:hover .bc-link svg{transform:translateX(5px)}
-
-  /* product grid */
   .toolbar{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:30px;align-items:center}
-  .search{flex:1;min-width:220px;display:flex;align-items:center;gap:10px;background:var(--steel);
-    border:1px solid var(--steel-2);border-radius:11px;padding:11px 15px;color:var(--muted)}
+  .search{flex:1;min-width:220px;display:flex;align-items:center;gap:10px;background:var(--steel);border:1px solid var(--steel-2);border-radius:11px;padding:11px 15px;color:var(--muted)}
   .search input{border:none;background:none;outline:none;font-family:var(--font-body);font-size:.92rem;color:var(--char);width:100%}
-  .chip{font-family:var(--font-body);font-size:.82rem;font-weight:600;padding:10px 16px;border-radius:11px;
-    border:1px solid var(--steel-2);background:var(--steel);color:var(--char-2);cursor:pointer;transition:.18s}
+  .chip{font-family:var(--font-body);font-size:.82rem;font-weight:600;padding:10px 16px;border-radius:11px;border:1px solid var(--steel-2);background:var(--steel);color:var(--char-2);cursor:pointer;transition:.18s}
   .chip:hover{border-color:var(--red-bright)}
   .chip.on{background:var(--char);color:var(--paper);border-color:var(--char)}
   .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-  .pcard{background:var(--steel);border:1px solid var(--steel-2);border-radius:var(--r);overflow:hidden;
-    box-shadow:var(--shadow);transition:transform .25s,box-shadow .25s;display:flex;flex-direction:column}
+  .pcard{background:var(--steel);border:1px solid var(--steel-2);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);transition:transform .25s,box-shadow .25s;display:flex;flex-direction:column}
   .pcard:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
   .pcard-img{position:relative;aspect-ratio:16/10;overflow:hidden}
   .pcard-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
   .pcard:hover .pcard-img img{transform:scale(1.06)}
-  .pcard-badge{position:absolute;top:12px;left:12px;font-family:var(--font-mono);font-size:.62rem;
-    letter-spacing:.14em;text-transform:uppercase;font-weight:700;padding:5px 10px;border-radius:7px;color:#fff}
-  .b-new{background:var(--red-bright)}
-  .b-used{background:rgba(20,20,20,.82);backdrop-filter:blur(4px)}
-  .fav{position:absolute;top:10px;right:10px;width:34px;height:34px;border-radius:9px;border:none;cursor:pointer;
-    background:rgba(255,255,255,.85);display:grid;place-items:center;transition:.2s}
+  .pcard-badge{position:absolute;top:12px;left:12px;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;padding:5px 10px;border-radius:7px;color:#fff}
+  .b-new{background:var(--red-bright)}.b-used{background:rgba(20,20,20,.82);backdrop-filter:blur(4px)}.b-exp{background:#1a6b4a}
+  .fav{position:absolute;top:10px;right:10px;width:34px;height:34px;border-radius:9px;border:none;cursor:pointer;background:rgba(255,255,255,.85);display:grid;place-items:center;transition:.2s}
   .fav:hover{background:#fff;transform:scale(1.08)}
   .fav.on svg{fill:var(--red-bright);stroke:var(--red-bright)}
   .pcard-body{padding:18px;display:flex;flex-direction:column;gap:10px;flex:1}
-  .pcard-body h4{font-family:var(--font-display);font-size:1.18rem;font-weight:600;text-transform:uppercase}
-  .price{font-family:var(--font-mono);font-weight:700;font-size:1.3rem;color:var(--red-bright);letter-spacing:.02em}
+  .pcard-body h4{font-family:var(--font-display);font-size:1.16rem;font-weight:600;text-transform:uppercase}
+  .price{font-family:var(--font-mono);font-weight:700;font-size:1.28rem;color:var(--red-bright);letter-spacing:.02em}
   .specs{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
-  .spec{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.06em;color:var(--muted);
-    background:var(--paper);border:1px solid var(--steel-2);padding:4px 8px;border-radius:6px}
+  .spec{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.06em;color:var(--muted);background:var(--paper);border:1px solid var(--steel-2);padding:4px 8px;border-radius:6px}
   .pcard-foot{display:flex;gap:8px;margin-top:auto;padding-top:6px}
   .pcard-foot .btn{flex:1;justify-content:center;font-size:.74rem;padding:11px 10px}
-  .btn-wa{background:#1faa52;color:#fff}
-  .btn-wa:hover{transform:translateY(-2px)}
-
-  /* process */
+  .btn-wa{background:#1faa52;color:#fff}.btn-wa:hover{transform:translateY(-2px)}
   .proc{background:var(--char);color:#fff}
-  .proc .sec-head h2{color:#fff}
-  .proc .sec-head p{color:#b5b5b0}
+  .proc .sec-head h2{color:#fff}.proc .sec-head p{color:#b5b5b0}
   .steps{display:grid;grid-template-columns:repeat(6,1fr);gap:0;position:relative;margin-top:30px}
   .step{position:relative;padding:0 14px;text-align:center}
   .step-line{position:absolute;top:27px;left:0;right:0;height:2px;background:rgba(255,255,255,.12);z-index:0}
   .step-line .fill{height:100%;width:0;background:linear-gradient(90deg,var(--red-bright),#ff8a8a);transition:width 1.6s ease}
-  .step-num{position:relative;z-index:2;width:56px;height:56px;border-radius:50%;margin:0 auto 16px;
-    display:grid;place-items:center;background:var(--char-2);border:2px solid rgba(255,255,255,.16);
-    font-family:var(--font-mono);font-weight:700;font-size:1.05rem;transition:.4s}
-  .step.lit .step-num{background:linear-gradient(135deg,var(--red-bright),var(--red-deep));border-color:transparent;
-    box-shadow:0 0 0 6px rgba(184,29,44,.18)}
+  .step-num{position:relative;z-index:2;width:56px;height:56px;border-radius:50%;margin:0 auto 16px;display:grid;place-items:center;background:var(--char-2);border:2px solid rgba(255,255,255,.16);font-family:var(--font-mono);font-weight:700;font-size:1.05rem;transition:.4s}
+  .step.lit .step-num{background:linear-gradient(135deg,var(--red-bright),var(--red-deep));border-color:transparent;box-shadow:0 0 0 6px rgba(184,29,44,.18)}
   .step h5{font-family:var(--font-display);font-size:.92rem;font-weight:600;text-transform:uppercase}
   .step p{font-size:.78rem;color:#9a9a95;margin-top:5px;line-height:1.4}
-
-  /* services + advantages */
   .feat{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-  .fcard{background:var(--steel);border:1px solid var(--steel-2);border-radius:var(--r);padding:28px 24px;
-    transition:transform .25s,box-shadow .25s}
+  .fcard{background:var(--steel);border:1px solid var(--steel-2);border-radius:var(--r);padding:28px 24px;transition:transform .25s,box-shadow .25s}
   .fcard:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
-  .ficon{width:50px;height:50px;border-radius:12px;background:linear-gradient(135deg,var(--red-bright),var(--red-deep));
-    display:grid;place-items:center;color:#fff;margin-bottom:16px}
-  .fcard h4{font-family:var(--font-display);font-size:1.18rem;font-weight:600;text-transform:uppercase;margin-bottom:7px}
+  .ficon{width:50px;height:50px;border-radius:12px;background:linear-gradient(135deg,var(--red-bright),var(--red-deep));display:grid;place-items:center;color:#fff;margin-bottom:16px}
+  .fcard h4{font-family:var(--font-display);font-size:1.16rem;font-weight:600;text-transform:uppercase;margin-bottom:7px}
   .fcard p{color:var(--muted);font-size:.92rem;line-height:1.55}
-
-  /* testimonials */
   .testi{background:var(--steel);overflow:hidden}
-  .testi-track{display:flex;gap:24px;width:max-content;animation:scroll 36s linear infinite}
+  .testi-track{display:flex;gap:24px;width:max-content;animation:scroll 38s linear infinite}
   .testi:hover .testi-track{animation-play-state:paused}
   @keyframes scroll{to{transform:translateX(calc(-50% - 12px))}}
   .tcard{width:380px;background:var(--paper);border:1px solid var(--steel-2);border-radius:var(--r);padding:28px;box-shadow:var(--shadow)}
   .stars{color:var(--red-bright);font-size:1rem;letter-spacing:2px;margin-bottom:12px}
   .tcard p{font-size:.96rem;line-height:1.6;color:var(--char-2);margin-bottom:18px}
   .tperson{display:flex;align-items:center;gap:12px}
-  .tav{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--red),var(--char));
-    display:grid;place-items:center;color:#fff;font-family:var(--font-display);font-weight:600}
+  .tav{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--red),var(--char));display:grid;place-items:center;color:#fff;font-family:var(--font-display);font-weight:600}
   .tperson b{font-size:.9rem}.tperson span{font-size:.76rem;color:var(--muted);display:block}
-
-  /* FAQ */
   .faq-item{border-bottom:1px solid var(--steel-2)}
-  .faq-q{width:100%;text-align:left;background:none;border:none;cursor:pointer;padding:22px 4px;
-    display:flex;justify-content:space-between;align-items:center;gap:16px;
-    font-family:var(--font-display);font-size:1.12rem;font-weight:600;text-transform:uppercase;color:var(--char)}
-  .faq-q .pm{flex-shrink:0;width:30px;height:30px;border-radius:8px;border:1px solid var(--steel-2);
-    display:grid;place-items:center;transition:.3s;color:var(--red-bright)}
+  .faq-q{width:100%;text-align:left;background:none;border:none;cursor:pointer;padding:22px 4px;display:flex;justify-content:space-between;align-items:center;gap:16px;font-family:var(--font-display);font-size:1.1rem;font-weight:600;text-transform:uppercase;color:var(--char)}
+  .faq-q .pm{flex-shrink:0;width:30px;height:30px;border-radius:8px;border:1px solid var(--steel-2);display:grid;place-items:center;transition:.3s;color:var(--red-bright)}
   .faq-item.open .pm{background:var(--red-bright);color:#fff;transform:rotate(45deg)}
   .faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s}
   .faq-a p{color:var(--muted);line-height:1.65;font-size:.96rem;padding:0 4px}
-  .faq-item.open .faq-a{max-height:240px;padding-bottom:22px}
-
-  /* contact */
+  .faq-item.open .faq-a{max-height:260px;padding-bottom:22px}
   .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}
   .ci{display:flex;gap:14px;margin-bottom:20px;align-items:flex-start}
-  .ci .ic{width:44px;height:44px;border-radius:11px;background:var(--steel);border:1px solid var(--steel-2);
-    display:grid;place-items:center;color:var(--red-bright);flex-shrink:0}
+  .ci .ic{width:44px;height:44px;border-radius:11px;background:var(--steel);border:1px solid var(--steel-2);display:grid;place-items:center;color:var(--red-bright);flex-shrink:0}
   .ci b{font-family:var(--font-display);text-transform:uppercase;font-size:.84rem;letter-spacing:.04em}
   .ci span{color:var(--muted);font-size:.92rem;display:block;margin-top:2px}
   .map{margin-top:24px;border-radius:var(--r);overflow:hidden;border:1px solid var(--steel-2);height:200px;position:relative;background:var(--steel)}
   .map iframe{width:100%;height:100%;border:0;filter:grayscale(.3)}
   form{background:var(--steel);border:1px solid var(--steel-2);border-radius:var(--r);padding:30px}
   .field{margin-bottom:16px}
-  .field label{display:block;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;
-    color:var(--muted);margin-bottom:7px}
-  .field input,.field textarea{width:100%;padding:13px 15px;border-radius:10px;border:1px solid var(--steel-2);
-    background:var(--paper);font-family:var(--font-body);font-size:.94rem;color:var(--char);outline:none;transition:.2s}
-  .field input:focus,.field textarea:focus{border-color:var(--red-bright);box-shadow:0 0 0 3px rgba(184,29,44,.12)}
+  .field label{display:block;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+  .field input,.field textarea,.field select{width:100%;padding:13px 15px;border-radius:10px;border:1px solid var(--steel-2);background:var(--paper);font-family:var(--font-body);font-size:.94rem;color:var(--char);outline:none;transition:.2s}
+  .field input:focus,.field textarea:focus,.field select:focus{border-color:var(--red-bright);box-shadow:0 0 0 3px rgba(184,29,44,.12)}
   .field textarea{resize:vertical;min-height:110px}
-
-  /* footer */
   footer{background:var(--char);color:#cfcfcc;padding:64px 0 28px}
   .foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.4fr;gap:34px;margin-bottom:44px}
   footer .logo{color:#fff;margin-bottom:14px}
@@ -243,251 +185,146 @@
   .foot-grid a{display:block;color:#9a9a95;text-decoration:none;font-size:.88rem;margin-bottom:10px;transition:.2s}
   .foot-grid a:hover{color:#ff8a8a}
   .socials{display:flex;gap:10px;margin-top:8px}
-  .socials a{width:38px;height:38px;border-radius:9px;border:1px solid rgba(255,255,255,.14);display:grid;
-    place-items:center;color:#cfcfcc;margin:0}
+  .socials a{width:38px;height:38px;border-radius:9px;border:1px solid rgba(255,255,255,.14);display:grid;place-items:center;color:#cfcfcc;margin:0}
   .socials a:hover{background:var(--red-bright);border-color:transparent;color:#fff}
-  .copy{border-top:1px solid rgba(255,255,255,.1);padding-top:24px;display:flex;justify-content:space-between;
-    flex-wrap:wrap;gap:10px;font-size:.82rem;color:#7a7a76}
-
-  /* whatsapp float */
-  .wa-float{position:fixed;bottom:24px;right:24px;width:58px;height:58px;border-radius:50%;background:#1faa52;
-    display:grid;place-items:center;box-shadow:0 8px 24px rgba(31,170,82,.5);z-index:90;color:#fff;
-    text-decoration:none;animation:pulse 2.4s infinite}
-  @keyframes pulse{0%{box-shadow:0 8px 24px rgba(31,170,82,.5),0 0 0 0 rgba(31,170,82,.5)}
-    70%{box-shadow:0 8px 24px rgba(31,170,82,.5),0 0 0 16px rgba(31,170,82,0)}100%{box-shadow:0 8px 24px rgba(31,170,82,.5)}}
-
-  /* scroll reveal */
+  .copy{border-top:1px solid rgba(255,255,255,.1);padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:.82rem;color:#7a7a76}
+  .wa-float{position:fixed;bottom:24px;right:24px;width:58px;height:58px;border-radius:50%;background:#1faa52;display:grid;place-items:center;box-shadow:0 8px 24px rgba(31,170,82,.5);z-index:90;color:#fff;text-decoration:none;animation:pulse 2.4s infinite}
+  @keyframes pulse{0%{box-shadow:0 8px 24px rgba(31,170,82,.5),0 0 0 0 rgba(31,170,82,.5)}70%{box-shadow:0 8px 24px rgba(31,170,82,.5),0 0 0 16px rgba(31,170,82,0)}100%{box-shadow:0 8px 24px rgba(31,170,82,.5)}}
   .sr{opacity:0;transform:translateY(28px);transition:opacity .7s,transform .7s}
   .sr.show{opacity:1;transform:none}
-
-  /* responsive */
-  @media(max-width:920px){
-    .nav-links{position:fixed;inset:74px 0 auto 0;flex-direction:column;background:var(--paper);
-      padding:24px;gap:6px;border-bottom:1px solid var(--steel-2);transform:translateY(-130%);transition:.35s;box-shadow:var(--shadow)}
+  @media(max-width:980px){
+    .nav-links{position:fixed;inset:74px 0 auto 0;flex-direction:column;background:var(--paper);padding:24px;gap:6px;border-bottom:1px solid var(--steel-2);transform:translateY(-130%);transition:.35s;box-shadow:var(--shadow)}
     .nav-links.open{transform:none}
     .nav-links a{color:var(--char)!important;padding:12px 0;width:100%;border-bottom:1px solid var(--steel)}
-    .burger{display:flex}
-    .nav-actions .btn-red{display:none}
-    .cards2{grid-template-columns:1fr}
-    .grid{grid-template-columns:1fr 1fr}
-    .feat{grid-template-columns:1fr 1fr}
-    .steps{grid-template-columns:repeat(2,1fr);gap:30px 14px}
-    .step-line{display:none}
-    .contact-grid{grid-template-columns:1fr}
-    .foot-grid{grid-template-columns:1fr 1fr;gap:28px}
-    .odo-row{grid-template-columns:1fr 1fr;gap:18px}
+    .burger{display:flex}.nav-actions .btn-red{display:none}
+    .cards3{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}.feat{grid-template-columns:1fr 1fr}
+    .steps{grid-template-columns:repeat(2,1fr);gap:30px 14px}.step-line{display:none}
+    .contact-grid{grid-template-columns:1fr}.foot-grid{grid-template-columns:1fr 1fr;gap:28px}.odo-row{grid-template-columns:1fr 1fr;gap:18px}
   }
-  @media(max-width:560px){
-    .grid{grid-template-columns:1fr}.feat{grid-template-columns:1fr}
-    .foot-grid{grid-template-columns:1fr}.pad{padding:64px 0}
-  }
+  @media(max-width:560px){.grid{grid-template-columns:1fr}.feat{grid-template-columns:1fr}.foot-grid{grid-template-columns:1fr}.pad{padding:64px 0}}
 </style>
 </head>
 <body>
-
-<!-- HEADER -->
 <header id="hdr">
   <div class="wrap nav">
     <a href="#accueil" class="logo">
       <span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13l2-5a2 2 0 0 1 2-1.5h10A2 2 0 0 1 19 8l2 5"/><path d="M3 13h18v4a1 1 0 0 1-1 1h-1"/><circle cx="7" cy="17" r="1.6"/><circle cx="17" cy="17" r="1.6"/></svg></span>
-      Easy Cars Import
+      <span>Easy Cars<small>Import · Export</small></span>
     </a>
     <nav class="nav-links" id="navlinks">
-      <a href="#accueil">Accueil</a>
-      <a href="#vehicles">Voitures</a>
-      <a href="#agri">Matériels agricoles</a>
-      <a href="#services">Services</a>
-      <a href="#apropos">À propos</a>
-      <a href="#contact">Contact</a>
+      <a href="#accueil">Accueil</a><a href="#vehicles">Voitures</a><a href="#agri">Matériels agricoles</a><a href="#export">Export</a><a href="#services">Services</a><a href="#contact">Contact</a>
     </nav>
     <div class="nav-actions">
-      <button class="theme-btn" id="theme" aria-label="Changer le thème">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="theme-ic"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-      </button>
+      <button class="theme-btn" id="theme" aria-label="Changer le thème"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="theme-ic"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
       <a href="#contact" class="btn btn-red">Demander un devis</a>
       <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </div>
 </header>
 
-<!-- HERO -->
 <section class="hero" id="accueil">
-  <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
+  <div class="hero-bg"></div><div class="hero-grid"></div>
   <div class="wrap hero-content">
-    <span class="eyebrow reveal-up">Importation internationale · Depuis 2014</span>
-    <h1 class="reveal-up">Vos véhicules et équipements agricoles, <span class="hl">importés en toute confiance</span></h1>
-    <p class="sub reveal-up">Nous trouvons les meilleures offres partout dans le monde et prenons en charge l'intégralité du processus : inspection, dédouanement, transport et livraison jusqu'à votre porte.</p>
+    <span class="eyebrow reveal-up">Commerce international · Import & Export · Depuis 2014</span>
+    <h1 class="reveal-up">Importez et exportez véhicules, matériels et marchandises <span class="hl">en toute confiance</span></h1>
+    <p class="sub reveal-up">Nous sourçons les meilleures offres partout dans le monde et expédions vos véhicules, engins et marchandises dans les deux sens. Inspection, dédouanement, transport et livraison : nous gérons tout.</p>
     <div class="hero-btns reveal-up">
-      <a href="#vehicles" class="btn btn-red">Voir nos véhicules
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      <a href="#agri" class="btn btn-ghost">Voir les matériels agricoles</a>
+      <a href="#vehicles" class="btn btn-red">Voir nos véhicules <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a href="#export" class="btn btn-ghost">Nos services d'export</a>
     </div>
   </div>
-  <div class="odo">
-    <div class="wrap odo-row">
-      <div class="odo-cell"><span class="odo-num" data-to="4200">0<span class="u">+</span></span><span class="odo-lbl">Véhicules importés</span></div>
-      <div class="odo-cell"><span class="odo-num" data-to="47">0</span><span class="odo-lbl">Pays desservis</span></div>
-      <div class="odo-cell"><span class="odo-num" data-to="98">0<span class="u">%</span></span><span class="odo-lbl">Clients satisfaits</span></div>
-      <div class="odo-cell"><span class="odo-num" data-to="11">0<span class="u">ans</span></span><span class="odo-lbl">D'expérience</span></div>
-    </div>
-  </div>
+  <div class="odo"><div class="wrap odo-row">
+    <div class="odo-cell"><span class="odo-num" data-to="4200">0<span class="u">+</span></span><span class="odo-lbl">Lots traités</span></div>
+    <div class="odo-cell"><span class="odo-num" data-to="47">0</span><span class="odo-lbl">Pays desservis</span></div>
+    <div class="odo-cell"><span class="odo-num" data-to="2">0<span class="u">sens</span></span><span class="odo-lbl">Import & export</span></div>
+    <div class="odo-cell"><span class="odo-num" data-to="11">0<span class="u">ans</span></span><span class="odo-lbl">D'expérience</span></div>
+  </div></div>
 </section>
 
-<!-- SECTION 1 : 2 cartes -->
 <section class="pad" id="explore">
   <div class="wrap">
-    <div class="sec-head sr">
-      <span class="eyebrow">Nos deux univers</span>
-      <h2>Que souhaitez-vous importer&nbsp;?</h2>
-      <p>Deux filières d'expertise, un seul interlocuteur. De la citadine d'occasion au tracteur de 200 chevaux, nous gérons l'achat et la logistique de bout en bout.</p>
-    </div>
-    <div class="cards2">
-      <a href="#vehicles" class="bigcard sr">
-        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80" alt="Véhicules">
-        <div class="bc-body">
-          <span class="tag">Filière 01</span>
-          <h3>Véhicules</h3>
-          <p>Neufs et d'occasion, toutes marques. Berlines, SUV, utilitaires et 4×4 sourcés en Europe, Asie et Amérique du Nord.</p>
-          <span class="bc-link">Découvrir <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-        </div>
-      </a>
-      <a href="#agri" class="bigcard sr">
-        <img src="https://images.unsplash.com/photo-1530267981375-f0de937f5f13?auto=format&fit=crop&w=1200&q=80" alt="Matériels agricoles">
-        <div class="bc-body">
-          <span class="tag">Filière 02</span>
-          <h3>Machines & matériels agricoles</h3>
-          <p>Tracteurs, moissonneuses, mini-pelles et pièces détachées. Du matériel professionnel inspecté et garanti.</p>
-          <span class="bc-link">Découvrir <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-        </div>
-      </a>
+    <div class="sec-head sr"><span class="eyebrow">Deux directions, trois filières</span><h2>Le commerce dans les deux sens</h2><p>Nous faisons entrer véhicules et matériels agricoles vers l'Afrique de l'Ouest, et sortir véhicules d'occasion et marchandises locales vers le reste du monde.</p></div>
+    <div class="flow sr">
+      <div class="flow-card"><span class="dir">↓ Import</span><h3>Vers chez vous</h3><p>Véhicules neufs et d'occasion, tracteurs, moissonneuses et engins sourcés en Europe, Asie et Amérique, livrés jusqu'à votre porte.</p></div>
+      <div class="flow-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3v18M8 21l-4-4M8 21l4-4M16 21V3M16 3l-4 4M16 3l4 4"/></svg></div>
+      <div class="flow-card"><span class="dir">↑ Export</span><h3>Vers le monde</h3><p>Véhicules d'occasion vers la sous-région et marchandises locales (produits agricoles, matières premières) vers l'international.</p></div>
     </div>
   </div>
 </section>
 
-<!-- VEHICLES -->
-<section class="pad" id="vehicles" style="background:var(--steel)">
+<section class="pad" style="background:var(--steel)">
   <div class="wrap">
-    <div class="sec-head sr">
-      <span class="eyebrow">Catalogue véhicules</span>
-      <h2>Véhicules neufs & d'occasion</h2>
-      <p>Filtrez, comparez, demandez un devis en un clic. Chaque véhicule est inspecté avant achat.</p>
+    <div class="sec-head sr"><span class="eyebrow">Nos univers</span><h2>Que souhaitez-vous déplacer&nbsp;?</h2></div>
+    <div class="cards3">
+      <a href="#vehicles" class="bigcard sr"><img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1000&q=80" alt="Véhicules"><div class="bc-body"><span class="tag">Filière 01 · Import</span><h3>Véhicules</h3><p>Neufs et d'occasion, toutes marques, sourcés à l'international.</p><span class="bc-link">Découvrir <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></a>
+      <a href="#agri" class="bigcard sr"><img src="https://images.unsplash.com/photo-1530267981375-f0de937f5f13?auto=format&fit=crop&w=1000&q=80" alt="Matériels agricoles"><div class="bc-body"><span class="tag">Filière 02 · Import</span><h3>Matériels agricoles</h3><p>Tracteurs, moissonneuses, engins et pièces détachées.</p><span class="bc-link">Découvrir <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></a>
+      <a href="#export" class="bigcard sr"><img src="https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=1000&q=80" alt="Export"><div class="bc-body"><span class="tag">Filière 03 · Export</span><h3>Export & marchandises</h3><p>Véhicules d'occasion et produits locaux vers le monde.</p><span class="bc-link">Découvrir <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></a>
     </div>
-    <div class="toolbar sr">
-      <div class="search">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
-        <input id="vsearch" placeholder="Rechercher une marque, un modèle…">
-      </div>
-      <button class="chip on" data-f="all">Tous</button>
-      <button class="chip" data-f="neuf">Neufs</button>
-      <button class="chip" data-f="occasion">Occasion</button>
-    </div>
+  </div>
+</section>
+
+<section class="pad" id="vehicles">
+  <div class="wrap">
+    <div class="sec-head sr"><span class="eyebrow">Import · Catalogue véhicules</span><h2>Véhicules neufs & d'occasion</h2><p>Filtrez, comparez, demandez un devis en un clic. Chaque véhicule est inspecté avant achat.</p></div>
+    <div class="toolbar sr"><div class="search"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input id="vsearch" placeholder="Rechercher une marque, un modèle…"></div><button class="chip on" data-f="all">Tous</button><button class="chip" data-f="neuf">Neufs</button><button class="chip" data-f="occasion">Occasion</button></div>
     <div class="grid" id="vgrid"></div>
   </div>
 </section>
 
-<!-- AGRICULTURE -->
-<section class="pad" id="agri">
+<section class="pad" id="agri" style="background:var(--steel)">
   <div class="wrap">
-    <div class="sec-head sr">
-      <span class="eyebrow">Catalogue agricole</span>
-      <h2>Machines & matériels agricoles</h2>
-      <p>Tracteurs, moissonneuses, engins de terrassement et pièces détachées, sourcés auprès de fournisseurs vérifiés.</p>
-    </div>
-    <div class="toolbar sr">
-      <div class="search">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
-        <input id="asearch" placeholder="Rechercher un type de matériel…">
-      </div>
-      <button class="chip on" data-fa="all">Tous</button>
-      <button class="chip" data-fa="Tracteur">Tracteurs</button>
-      <button class="chip" data-fa="Moissonneuse">Moissonneuses</button>
-      <button class="chip" data-fa="Engin">Engins</button>
-    </div>
+    <div class="sec-head sr"><span class="eyebrow">Import · Catalogue agricole</span><h2>Machines & matériels agricoles</h2><p>Tracteurs, moissonneuses, engins de terrassement et pièces détachées, sourcés auprès de fournisseurs vérifiés.</p></div>
+    <div class="toolbar sr"><div class="search"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input id="asearch" placeholder="Rechercher un type de matériel…"></div><button class="chip on" data-fa="all">Tous</button><button class="chip" data-fa="Tracteur">Tracteurs</button><button class="chip" data-fa="Moissonneuse">Moissonneuses</button><button class="chip" data-fa="Engin">Engins</button></div>
     <div class="grid" id="agrid"></div>
   </div>
 </section>
 
-<!-- SERVICES -->
+<section class="pad" id="export">
+  <div class="wrap">
+    <div class="sec-head sr"><span class="eyebrow">Export · Vers le monde</span><h2>Ce que nous exportons</h2><p>Véhicules d'occasion vers la sous-région et marchandises locales sourcées et conditionnées pour l'international. (Exemples — à adapter selon vos produits réels.)</p></div>
+    <div class="toolbar sr"><div class="search"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input id="esearch" placeholder="Rechercher un produit à exporter…"></div><button class="chip on" data-fe="all">Tous</button><button class="chip" data-fe="Véhicule">Véhicules</button><button class="chip" data-fe="Marchandise">Marchandises</button></div>
+    <div class="grid" id="egrid"></div>
+  </div>
+</section>
+
 <section class="pad" id="services" style="background:var(--steel)">
-  <div class="wrap">
-    <div class="sec-head sr">
-      <span class="eyebrow">Ce que nous faisons pour vous</span>
-      <h2>Services</h2>
-      <p>Un accompagnement complet, du premier contact à la remise des clés.</p>
-    </div>
-    <div class="feat" id="services-grid"></div>
-  </div>
+  <div class="wrap"><div class="sec-head sr"><span class="eyebrow">Ce que nous faisons pour vous</span><h2>Services</h2><p>Un accompagnement complet, à l'import comme à l'export, du premier contact à la livraison finale.</p></div><div class="feat" id="services-grid"></div></div>
 </section>
 
-<!-- PROCESS -->
 <section class="pad proc" id="processus">
-  <div class="wrap">
-    <div class="sec-head sr">
-      <span class="eyebrow" style="color:#ff8a8a">Comment ça marche</span>
-      <h2>Six étapes, zéro mauvaise surprise</h2>
-      <p>Un parcours transparent que vous suivez en temps réel.</p>
-    </div>
-    <div class="steps" id="steps">
-      <div class="step-line"><div class="fill" id="stepfill"></div></div>
-    </div>
-  </div>
+  <div class="wrap"><div class="sec-head sr"><span class="eyebrow" style="color:#ff8a8a">Comment ça marche</span><h2>Six étapes, zéro mauvaise surprise</h2><p>Le même parcours transparent, que vous importiez ou exportiez.</p></div><div class="steps" id="steps"><div class="step-line"><div class="fill" id="stepfill"></div></div></div></div>
 </section>
 
-<!-- AVANTAGES -->
 <section class="pad" id="apropos">
-  <div class="wrap">
-    <div class="sec-head sr">
-      <span class="eyebrow">Pourquoi Easy Cars Import</span>
-      <h2>Nos avantages</h2>
-    </div>
-    <div class="feat" id="adv-grid"></div>
-  </div>
+  <div class="wrap"><div class="sec-head sr"><span class="eyebrow">Pourquoi Easy Cars Import Export</span><h2>Nos avantages</h2></div><div class="feat" id="adv-grid"></div></div>
 </section>
 
-<!-- TESTIMONIALS -->
 <section class="pad testi">
-  <div class="wrap sr"><div class="sec-head" style="margin-bottom:36px">
-    <span class="eyebrow">Ils nous ont fait confiance</span>
-    <h2>Témoignages</h2>
-  </div></div>
+  <div class="wrap sr"><div class="sec-head" style="margin-bottom:36px"><span class="eyebrow">Ils nous ont fait confiance</span><h2>Témoignages</h2></div></div>
   <div class="testi-track" id="testi"></div>
 </section>
 
-<!-- FAQ -->
 <section class="pad" id="faq">
-  <div class="wrap" style="max-width:840px">
-    <div class="sec-head sr">
-      <span class="eyebrow">Questions fréquentes</span>
-      <h2>FAQ</h2>
-    </div>
-    <div id="faqlist" class="sr"></div>
-  </div>
+  <div class="wrap" style="max-width:840px"><div class="sec-head sr"><span class="eyebrow">Questions fréquentes</span><h2>FAQ</h2></div><div id="faqlist" class="sr"></div></div>
 </section>
 
-<!-- CONTACT -->
 <section class="pad" id="contact" style="background:var(--steel)">
   <div class="wrap">
-    <div class="sec-head sr">
-      <span class="eyebrow">Parlons de votre projet</span>
-      <h2>Contact & devis</h2>
-      <p>Réponse sous 24 h ouvrées. Décrivez votre besoin, nous revenons vers vous avec une estimation.</p>
-    </div>
+    <div class="sec-head sr"><span class="eyebrow">Parlons de votre projet</span><h2>Contact & devis</h2><p>Réponse sous 24 h ouvrées. Précisez s'il s'agit d'un import ou d'un export.</p></div>
     <div class="contact-grid">
       <div class="sr">
-        <div class="ci"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><b>Adresse</b><span>Zone Logistique Port Autonome, Abidjan, Côte d'Ivoire</span></div></div>
-        <div class="ci"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></div><div><b>Téléphone</b><span>+225 07 00 00 00 00</span></div></div>
-        <div class="ci"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg></div><div><b>Email</b><span>contact@easycarsimport.com</span></div></div>
-        <div class="ci"><div class="ic" style="color:#1faa52"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 20z"/></svg></div><div><b>WhatsApp</b><span>Réponse immédiate · +225 07 00 00 00 00</span></div></div>
-        <div class="map">
-          <iframe loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=-4.05%2C5.28%2C-3.95%2C5.36&layer=mapnik" title="Carte"></iframe>
-        </div>
+        <div class="ci"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><b>Adresse</b><span>Ilot C/SB, Hakoumey, Abomey-Calavi, Bénin</span></div></div>
+        <div class="ci"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></div><div><b>Téléphone</b><span>+229 01 90 29 30 16</span></div></div>
+        <div class="ci"><div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg></div><div><b>Email</b><span>contact@easycarimport.bj</span></div></div>
+        <div class="ci"><div class="ic" style="color:#1faa52"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 20z"/></svg></div><div><b>WhatsApp</b><span>Réponse immédiate · +229 01 90 29 30 16</span></div></div>
+        <div class="map"><iframe loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=2.30%2C6.40%2C2.42%2C6.50&layer=mapnik&marker=6.45%2C2.36" title="Carte Abomey-Calavi"></iframe></div>
       </div>
       <form class="sr" id="cform">
+        <div class="field"><label>Type de demande</label><select id="f-type"><option>Import — véhicule</option><option>Import — matériel agricole</option><option>Export — véhicule</option><option>Export — marchandise</option></select></div>
         <div class="field"><label>Nom complet</label><input id="f-name" placeholder="Votre nom" required></div>
         <div class="field"><label>Email</label><input type="email" id="f-mail" placeholder="vous@email.com" required></div>
         <div class="field"><label>Téléphone</label><input id="f-tel" placeholder="+225 …"></div>
-        <div class="field"><label>Votre message</label><textarea id="f-msg" placeholder="Décrivez le véhicule ou le matériel recherché…"></textarea></div>
+        <div class="field"><label>Votre message</label><textarea id="f-msg" placeholder="Décrivez le véhicule, le matériel ou la marchandise…"></textarea></div>
         <button type="submit" class="btn btn-red" style="width:100%;justify-content:center">Envoyer la demande</button>
         <p id="fmsg" style="text-align:center;color:#1faa52;font-size:.85rem;margin-top:12px;display:none">Demande envoyée — nous vous recontactons sous 24 h.</p>
       </form>
@@ -495,52 +332,30 @@
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <a href="#accueil" class="logo"><span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13l2-5a2 2 0 0 1 2-1.5h10A2 2 0 0 1 19 8l2 5"/><path d="M3 13h18v4a1 1 0 0 1-1 1h-1"/><circle cx="7" cy="17" r="1.6"/><circle cx="17" cy="17" r="1.6"/></svg></span>Easy Cars Import</a>
-        <p>Plateforme d'importation de véhicules et de matériels agricoles. Transparence, inspection et logistique maîtrisée, partout dans le monde.</p>
+        <a href="#accueil" class="logo"><span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13l2-5a2 2 0 0 1 2-1.5h10A2 2 0 0 1 19 8l2 5"/><path d="M3 13h18v4a1 1 0 0 1-1 1h-1"/><circle cx="7" cy="17" r="1.6"/><circle cx="17" cy="17" r="1.6"/></svg></span><span>Easy Cars<small style="display:block;font-family:var(--font-mono);font-size:.54rem;letter-spacing:.22em;color:#ff8a8a">Import · Export</small></span></a>
+        <p>Plateforme de commerce international. Import de véhicules et matériels agricoles, export de véhicules et marchandises. Transparence et logistique maîtrisée.</p>
         <div class="socials">
           <a href="#" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V6h-3c-1.7 0-3 1.3-3 3v2H8v3h3v7h3v-7h2.5l.5-3H14V9z"/></svg></a>
           <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
           <a href="#" aria-label="WhatsApp"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2z"/></svg></a>
         </div>
       </div>
-      <div>
-        <h6>Liens rapides</h6>
-        <a href="#vehicles">Véhicules</a><a href="#agri">Matériels agricoles</a>
-        <a href="#services">Services</a><a href="#faq">FAQ</a><a href="#contact">Contact</a>
-      </div>
-      <div>
-        <h6>Filières</h6>
-        <a href="#vehicles">Véhicules neufs</a><a href="#vehicles">Véhicules d'occasion</a>
-        <a href="#agri">Tracteurs</a><a href="#agri">Pièces détachées</a>
-      </div>
-      <div>
-        <h6>Newsletter</h6>
-        <p style="margin-bottom:14px">Recevez nos nouvelles arrivées et bons plans import.</p>
-        <div style="display:flex;gap:8px">
-          <input placeholder="Votre email" style="flex:1;padding:11px 13px;border-radius:9px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.05);color:#fff;outline:none;font-family:var(--font-body);font-size:.85rem">
-          <button class="btn btn-red" style="padding:11px 14px">OK</button>
-        </div>
-      </div>
+      <div><h6>Liens rapides</h6><a href="#vehicles">Véhicules</a><a href="#agri">Matériels agricoles</a><a href="#export">Export</a><a href="#services">Services</a><a href="#contact">Contact</a></div>
+      <div><h6>Filières</h6><a href="#vehicles">Véhicules neufs</a><a href="#vehicles">Véhicules d'occasion</a><a href="#agri">Tracteurs & pièces</a><a href="#export">Marchandises</a></div>
+      <div><h6>Newsletter</h6><p style="margin-bottom:14px">Recevez nos nouvelles arrivées et opportunités import/export.</p><div style="display:flex;gap:8px"><input placeholder="Votre email" style="flex:1;padding:11px 13px;border-radius:9px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.05);color:#fff;outline:none;font-family:var(--font-body);font-size:.85rem"><button class="btn btn-red" style="padding:11px 14px">OK</button></div></div>
     </div>
-    <div class="copy">
-      <span>© 2026 Easy Cars Import. Tous droits réservés.</span>
-      <span>Maquette de démonstration · Données fictives</span>
-    </div>
+    <div class="copy"><span>© 2026 Easy Cars Import Export. Tous droits réservés.</span><span>Maquette de démonstration · Données fictives</span></div>
   </div>
 </footer>
 
-<a class="wa-float" href="https://wa.me/2250700000000" target="_blank" aria-label="WhatsApp">
-  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 20zm4.5-5.8c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1a6.5 6.5 0 0 1-3.2-2.8c-.2-.4.2-.4.6-1.2.1-.1 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.5-.4h-.5a1 1 0 0 0-.7.3c-.8.8-1 1.9-.6 3.1a11 11 0 0 0 4.2 4.6c2.3 1.3 2.8 1.1 3.3 1 .6-.1 1.4-.6 1.6-1.1.2-.6.2-1 .1-1.1l-.4-.2z"/></svg>
-</a>
+<a class="wa-float" href="https://wa.me/2290190293016" target="_blank" aria-label="WhatsApp"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 20zm4.5-5.8c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1a6.5 6.5 0 0 1-3.2-2.8c-.2-.4.2-.4.6-1.2.1-.1 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.5-.4h-.5a1 1 0 0 0-.7.3c-.8.8-1 1.9-.6 3.1a11 11 0 0 0 4.2 4.6c2.3 1.3 2.8 1.1 3.3 1 .6-.1 1.4-.6 1.6-1.1.2-.6.2-1 .1-1.1l-.4-.2z"/></svg></a>
 
 <script>
-/* ---------- DATA (démo) ---------- */
-const vehicles = [
+const vehicles=[
   {n:"Toyota Land Cruiser 300",p:"68 500",cat:"neuf",img:"1605559424843-9e4c228bf1c2",specs:["2024","Diesel","Auto","0 km"],loc:"Japon"},
   {n:"Mercedes-Benz GLE 350",p:"54 900",cat:"neuf",img:"1618843479313-40f8afb4b4d8",specs:["2024","Hybride","Auto","0 km"],loc:"Allemagne"},
   {n:"Toyota Hilux Double Cab",p:"32 200",cat:"occasion",img:"1559416523-140ddc3d238c",specs:["2021","Diesel","Manuel","48 000 km"],loc:"Dubaï"},
@@ -548,161 +363,91 @@ const vehicles = [
   {n:"Ford Ranger Wildtrak",p:"38 400",cat:"neuf",img:"1551830820-330a71b99659",specs:["2024","Diesel","Auto","0 km"],loc:"USA"},
   {n:"Hyundai Tucson",p:"24 900",cat:"occasion",img:"1617469767053-d3b523a0b982",specs:["2021","Essence","Auto","52 000 km"],loc:"Corée"},
 ];
-const equip = [
+const equip=[
   {n:"John Deere 6155M",p:"89 000",type:"Tracteur",img:"1591567459203-c1c43c2f1c9b",specs:["2023","155 ch","320 h"],loc:"USA",state:"Occasion"},
   {n:"New Holland CR8.90",p:"245 000",type:"Moissonneuse",img:"1625246333195-78d9c38ad449",specs:["2022","490 ch","610 h"],loc:"Italie",state:"Occasion"},
   {n:"Caterpillar 301.7 CR",p:"42 500",type:"Engin",img:"1581094794329-c8112a89af12",specs:["2023","18 ch","Mini-pelle"],loc:"USA",state:"Neuf"},
   {n:"Massey Ferguson 5710",p:"63 700",type:"Tracteur",img:"1500382017468-9049fed747ef",specs:["2021","100 ch","1 200 h"],loc:"France",state:"Occasion"},
-  {n:"Komatsu D51PX Bulldozer",p:"118 000",type:"Engin",img:"1581092160562-40aa08e78837",specs:["2020","130 ch","2 400 h"],loc:"Japon",state:"Occasion"},
+  {n:"Komatsu D51PX",p:"118 000",type:"Engin",img:"1581092160562-40aa08e78837",specs:["2020","130 ch","2 400 h"],loc:"Japon",state:"Occasion"},
   {n:"Claas Lexion 5400",p:"198 000",type:"Moissonneuse",img:"1574323347407-f5e1ad6d020b",specs:["2023","320 ch","180 h"],loc:"Allemagne",state:"Neuf"},
 ];
+const exports_=[
+  {n:"Toyota Corolla (export)",p:"Sur devis",type:"Véhicule",img:"1590362891991-f776e747a588",specs:["Occasion","Vers sous-région","Lot 5-20 u."],loc:"Abidjan → Mali"},
+  {n:"Fèves de cacao",p:"Cours du jour",type:"Marchandise",img:"1511381939415-e44015466834",specs:["Sacs 60 kg","Conteneur 20'","Certifié"],loc:"Côte d'Ivoire → UE"},
+  {n:"Noix d'anacarde brute",p:"Cours du jour",type:"Marchandise",img:"1508747703725-719777637510",specs:["Sacs 80 kg","FOB Abidjan","Calibrée"],loc:"Côte d'Ivoire → Asie"},
+  {n:"Hyundai H100 (export)",p:"Sur devis",type:"Véhicule",img:"1601584115197-04ecc0da31d7",specs:["Utilitaire","Occasion","Lot"],loc:"Abidjan → Burkina"},
+  {n:"Beurre de karité",p:"Cours du jour",type:"Marchandise",img:"1556228578-8c89e6adf883",specs:["Fûts","Bio possible","Cosmétique"],loc:"Afrique → Europe"},
+  {n:"Pneus & pièces auto",p:"Sur devis",type:"Marchandise",img:"1486262715619-67b85e0b08d3",specs:["Reconditionné","Lot mixte","Conteneur"],loc:"Abidjan → Région"},
+];
 const services=[
-  ["Sourcing & achat","Recherche du véhicule ou matériel idéal au meilleur prix sur les marchés internationaux.","M3 7h18M5 7v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"],
-  ["Inspection","Contrôle technique et photographique avant tout paiement, par nos experts sur place.","M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"],
-  ["Expédition","Réservation du fret maritime ou aérien, conteneur dédié ou groupé.","M2 13h20M5 13l1.5-5h11L19 13M5 13v5h14v-5M7 18v2M17 18v2"],
-  ["Dédouanement","Gestion des formalités douanières et des taxes à l'arrivée, sans tracas.","M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"],
-  ["Transport","Acheminement depuis le port jusqu'à l'adresse de livraison finale.","M1 3h15v13H1zM16 8h4l3 3v5h-7V8zM5.5 19a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM18.5 19a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"],
+  ["Sourcing & achat","Recherche du véhicule, matériel ou marchandise au meilleur prix, à l'import comme à l'export.","M3 7h18M5 7v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"],
+  ["Inspection & qualité","Contrôle technique, photographique ou sanitaire avant tout paiement ou expédition.","M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"],
+  ["Expédition","Fret maritime ou aérien, conteneur dédié ou groupé, dans les deux sens.","M2 13h20M5 13l1.5-5h11L19 13M5 13v5h14v-5M7 18v2M17 18v2"],
+  ["Dédouanement","Formalités douanières et taxes à l'import comme à l'export, sans tracas.","M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"],
+  ["Transport","Acheminement porte-à-porte, du fournisseur au port et du port au client.","M1 3h15v13H1zM16 8h4l3 3v5h-7V8zM5.5 19a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM18.5 19a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"],
   ["Assistance 24/7","Un conseiller dédié vous suit à chaque étape, par téléphone ou WhatsApp.","M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"],
 ];
-const steps=[
-  ["Choisissez","Sélectionnez votre véhicule ou matériel dans le catalogue."],
-  ["Validation","Nous confirmons disponibilité, état et prix final."],
-  ["Paiement sécurisé","Acompte via canal protégé, reçu immédiat."],
-  ["Inspection","Contrôle complet et rapport photo avant départ."],
-  ["Expédition","Mise en conteneur et suivi maritime en temps réel."],
-  ["Livraison","Dédouanement, transport et remise des clés."],
-];
+const steps=[["Choisissez","Sélectionnez votre lot à importer ou à exporter."],["Validation","Nous confirmons disponibilité, état et prix final."],["Paiement sécurisé","Acompte via canal protégé, reçu immédiat."],["Inspection","Contrôle complet et rapport avant expédition."],["Expédition","Conteneurisation et suivi maritime en temps réel."],["Livraison","Dédouanement, transport et remise finale."]];
 const advantages=[
-  ["Prix compétitifs","Accès direct aux marchés sources, sans intermédiaire superflu.","M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"],
-  ["Inspection avant achat","Vous ne payez le solde qu'après validation du rapport.","M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"],
-  ["Import sécurisé","Paiements protégés et documents conformes à chaque étape.","M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"],
-  ["Livraison rapide","Réseau logistique optimisé pour réduire les délais.","M13 2L3 14h7l-1 8 10-12h-7l1-8z"],
+  ["Prix compétitifs","Accès direct aux marchés sources et acheteurs, sans intermédiaire superflu.","M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"],
+  ["Inspection avant paiement","Vous ne réglez le solde qu'après validation du rapport.","M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"],
+  ["Échanges sécurisés","Paiements protégés et documents conformes à chaque étape.","M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"],
+  ["Logistique rapide","Réseau optimisé import/export pour réduire les délais.","M13 2L3 14h7l-1 8 10-12h-7l1-8z"],
   ["Support 24/7","Une équipe joignable à toute heure, dans votre langue.","M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"],
-  ["Garantie qualité","Matériel certifié et historique vérifié avant expédition.","M12 2l2.4 7.4H22l-6 4.4 2.3 7.2L12 16.6 5.7 21l2.3-7.2-6-4.4h7.6z"],
+  ["Garantie qualité","Matériel certifié et marchandise contrôlée avant départ.","M12 2l2.4 7.4H22l-6 4.4 2.3 7.2L12 16.6 5.7 21l2.3-7.2-6-4.4h7.6z"],
 ];
 const testimonials=[
-  ["Voiture livrée en parfait état, exactement comme sur les photos d'inspection. Process limpide.","Koffi A.","Importateur · Abidjan"],
-  ["J'ai fait venir un tracteur John Deere d'Europe. Devis clair, zéro frais caché. Je recommande.","Mariam D.","Exploitante agricole · Bamako"],
-  ["Suivi WhatsApp impeccable du début à la fin. Le dédouanement a été géré sans que j'aie à bouger.","Jean-Paul N.","Garage auto · Douala"],
-  ["Trois véhicules importés pour ma flotte. Prix imbattables et délais respectés.","Aïcha B.","Gérante VTC · Dakar"],
+  ["Voiture importée en parfait état, exactement comme sur les photos d'inspection. Process limpide.","Koffi A.","Importateur · Abidjan"],
+  ["J'ai fait venir un tracteur John Deere d'Europe. Devis clair, zéro frais caché.","Mariam D.","Exploitante agricole · Bamako"],
+  ["Ils ont géré l'export de mon lot de véhicules vers le Mali sans accroc. Très pro.","Jean-Paul N.","Négociant auto · Bouaké"],
+  ["Mon premier conteneur d'anacarde exporté avec leur aide. Documents douaniers impeccables.","Aïcha B.","Productrice · Korhogo"],
 ];
 const faqs=[
-  ["Combien de temps prend une importation ?","Comptez en moyenne 4 à 8 semaines selon l'origine et le mode de transport (maritime ou aérien). Vous suivez chaque étape en temps réel."],
-  ["Puis-je inspecter le véhicule avant de payer ?","Oui. Nous réalisons un rapport photo et technique complet, et le solde n'est versé qu'après votre validation."],
-  ["Les frais de douane sont-ils inclus ?","Le calculateur d'import vous donne une estimation transport + assurance + droits selon le pays de destination. Le dédouanement peut être pris en charge par nos soins."],
-  ["Proposez-vous des pièces détachées agricoles ?","Oui, nous sourçons aussi les pièces détachées d'origine pour la plupart des grandes marques."],
-  ["Quels moyens de paiement acceptez-vous ?","Virement bancaire international et solutions sécurisées sous séquestre pour les montants élevés."],
+  ["Faites-vous l'import ET l'export ?","Oui. Nous importons véhicules et matériels agricoles vers l'Afrique de l'Ouest, et exportons véhicules d'occasion et marchandises locales vers le reste du monde."],
+  ["Combien de temps prend une opération ?","En moyenne 4 à 8 semaines selon l'origine, la destination et le mode de transport. Vous suivez chaque étape en temps réel."],
+  ["Puis-je inspecter avant de payer ?","Oui. Rapport photo et technique (ou sanitaire pour les marchandises) complet, solde versé seulement après votre validation."],
+  ["Gérez-vous les marchandises agricoles à l'export ?","Oui : sourcing, conditionnement, certification et formalités douanières pour des produits comme le cacao, l'anacarde ou le karité."],
+  ["Quels moyens de paiement acceptez-vous ?","Virement bancaire international et solutions sous séquestre pour les montants élevés."],
 ];
-
-/* ---------- RENDER ---------- */
 const img=(id,w=800)=>`https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=80`;
 const heart=`<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1L12 21l7.7-7.6 1.1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>`;
-
-function vCard(v){return `<article class="pcard" data-cat="${v.cat}" data-name="${v.n.toLowerCase()}">
-  <div class="pcard-img"><img loading="lazy" src="${img(v.img)}" alt="${v.n}">
-    <span class="pcard-badge ${v.cat==='neuf'?'b-new':'b-used'}">${v.cat==='neuf'?'Neuf':'Occasion'}</span>
-    <button class="fav" onclick="this.classList.toggle('on')" aria-label="Favori">${heart}</button>
-  </div>
-  <div class="pcard-body">
-    <h4>${v.n}</h4>
-    <div class="price">${v.p} €</div>
-    <div class="specs">${v.specs.map(s=>`<span class="spec">${s}</span>`).join('')}<span class="spec">📍 ${v.loc}</span></div>
-    <div class="pcard-foot">
-      <a href="#contact" class="btn btn-dark">Devis</a>
-      <a href="https://wa.me/2250700000000" target="_blank" class="btn btn-wa">WhatsApp</a>
-    </div>
-  </div></article>`;}
-
-function aCard(e){return `<article class="pcard" data-type="${e.type}" data-name="${e.n.toLowerCase()}">
-  <div class="pcard-img"><img loading="lazy" src="${img(e.img)}" alt="${e.n}">
-    <span class="pcard-badge ${e.state==='Neuf'?'b-new':'b-used'}">${e.state}</span>
-    <button class="fav" onclick="this.classList.toggle('on')" aria-label="Favori">${heart}</button>
-  </div>
-  <div class="pcard-body">
-    <h4>${e.n}</h4>
-    <div class="price">${e.p} €</div>
-    <div class="specs"><span class="spec">${e.type}</span>${e.specs.map(s=>`<span class="spec">${s}</span>`).join('')}<span class="spec">📍 ${e.loc}</span></div>
-    <div class="pcard-foot">
-      <a href="#contact" class="btn btn-dark">Devis</a>
-      <a href="https://wa.me/2250700000000" target="_blank" class="btn btn-wa">WhatsApp</a>
-    </div>
-  </div></article>`;}
-
+function vCard(v){return `<article class="pcard" data-cat="${v.cat}" data-name="${v.n.toLowerCase()}"><div class="pcard-img"><img loading="lazy" src="${img(v.img)}" alt="${v.n}"><span class="pcard-badge ${v.cat==='neuf'?'b-new':'b-used'}">${v.cat==='neuf'?'Neuf':'Occasion'}</span><button class="fav" onclick="this.classList.toggle('on')" aria-label="Favori">${heart}</button></div><div class="pcard-body"><h4>${v.n}</h4><div class="price">${v.p} €</div><div class="specs">${v.specs.map(s=>`<span class="spec">${s}</span>`).join('')}<span class="spec">📍 ${v.loc}</span></div><div class="pcard-foot"><a href="#contact" class="btn btn-dark">Devis</a><a href="https://wa.me/2290190293016" target="_blank" class="btn btn-wa">WhatsApp</a></div></div></article>`;}
+function aCard(e){return `<article class="pcard" data-type="${e.type}" data-name="${e.n.toLowerCase()}"><div class="pcard-img"><img loading="lazy" src="${img(e.img)}" alt="${e.n}"><span class="pcard-badge ${e.state==='Neuf'?'b-new':'b-used'}">${e.state}</span><button class="fav" onclick="this.classList.toggle('on')" aria-label="Favori">${heart}</button></div><div class="pcard-body"><h4>${e.n}</h4><div class="price">${e.p} €</div><div class="specs"><span class="spec">${e.type}</span>${e.specs.map(s=>`<span class="spec">${s}</span>`).join('')}<span class="spec">📍 ${e.loc}</span></div><div class="pcard-foot"><a href="#contact" class="btn btn-dark">Devis</a><a href="https://wa.me/2290190293016" target="_blank" class="btn btn-wa">WhatsApp</a></div></div></article>`;}
+function eCard(x){return `<article class="pcard" data-etype="${x.type}" data-name="${x.n.toLowerCase()}"><div class="pcard-img"><img loading="lazy" src="${img(x.img)}" alt="${x.n}"><span class="pcard-badge b-exp">Export</span><button class="fav" onclick="this.classList.toggle('on')" aria-label="Favori">${heart}</button></div><div class="pcard-body"><h4>${x.n}</h4><div class="price">${x.p}</div><div class="specs"><span class="spec">${x.type}</span>${x.specs.map(s=>`<span class="spec">${s}</span>`).join('')}<span class="spec">📍 ${x.loc}</span></div><div class="pcard-foot"><a href="#contact" class="btn btn-dark">Devis</a><a href="https://wa.me/2290190293016" target="_blank" class="btn btn-wa">WhatsApp</a></div></div></article>`;}
 document.getElementById('vgrid').innerHTML=vehicles.map(vCard).join('');
 document.getElementById('agrid').innerHTML=equip.map(aCard).join('');
-
-document.getElementById('services-grid').innerHTML=services.map(s=>`
-  <div class="fcard sr"><div class="ficon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${s[2].split('M').filter(Boolean).map(d=>`<path d="M${d}"/>`).join('')}</svg></div>
-  <h4>${s[0]}</h4><p>${s[1]}</p></div>`).join('');
-
-document.getElementById('adv-grid').innerHTML=advantages.map(a=>`
-  <div class="fcard sr"><div class="ficon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${a[2].split('M').filter(Boolean).map(d=>`<path d="M${d}"/>`).join('')}</svg></div>
-  <h4>${a[0]}</h4><p>${a[1]}</p></div>`).join('');
-
+document.getElementById('egrid').innerHTML=exports_.map(eCard).join('');
+document.getElementById('services-grid').innerHTML=services.map(s=>`<div class="fcard sr"><div class="ficon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${s[2].split('M').filter(Boolean).map(d=>`<path d="M${d}"/>`).join('')}</svg></div><h4>${s[0]}</h4><p>${s[1]}</p></div>`).join('');
+document.getElementById('adv-grid').innerHTML=advantages.map(a=>`<div class="fcard sr"><div class="ficon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${a[2].split('M').filter(Boolean).map(d=>`<path d="M${d}"/>`).join('')}</svg></div><h4>${a[0]}</h4><p>${a[1]}</p></div>`).join('');
 const stepsEl=document.getElementById('steps');
-steps.forEach((s,i)=>{stepsEl.insertAdjacentHTML('beforeend',
-  `<div class="step"><div class="step-num">${String(i+1).padStart(2,'0')}</div><h5>${s[0]}</h5><p>${s[1]}</p></div>`);});
-
-document.getElementById('testi').innerHTML=[...testimonials,...testimonials].map(t=>`
-  <div class="tcard"><div class="stars">★★★★★</div><p>"${t[0]}"</p>
-  <div class="tperson"><div class="tav">${t[1][0]}</div><div><b>${t[1]}</b><span>${t[2]}</span></div></div></div>`).join('');
-
-document.getElementById('faqlist').innerHTML=faqs.map(f=>`
-  <div class="faq-item"><button class="faq-q">${f[0]}<span class="pm"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span></button>
-  <div class="faq-a"><p>${f[1]}</p></div></div>`).join('');
-
-/* ---------- INTERACTIONS ---------- */
-// header solid on scroll
+steps.forEach((s,i)=>stepsEl.insertAdjacentHTML('beforeend',`<div class="step"><div class="step-num">${String(i+1).padStart(2,'0')}</div><h5>${s[0]}</h5><p>${s[1]}</p></div>`));
+document.getElementById('testi').innerHTML=[...testimonials,...testimonials].map(t=>`<div class="tcard"><div class="stars">★★★★★</div><p>"${t[0]}"</p><div class="tperson"><div class="tav">${t[1][0]}</div><div><b>${t[1]}</b><span>${t[2]}</span></div></div></div>`).join('');
+document.getElementById('faqlist').innerHTML=faqs.map(f=>`<div class="faq-item"><button class="faq-q">${f[0]}<span class="pm"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span></button><div class="faq-a"><p>${f[1]}</p></div></div>`).join('');
 const hdr=document.getElementById('hdr');
 addEventListener('scroll',()=>hdr.classList.toggle('solid',scrollY>40));
-
-// burger
 const burger=document.getElementById('burger'),nav=document.getElementById('navlinks');
 burger.onclick=()=>nav.classList.toggle('open');
 nav.querySelectorAll('a').forEach(a=>a.onclick=()=>nav.classList.remove('open'));
-
-// theme
 const themeBtn=document.getElementById('theme'),ic=document.getElementById('theme-ic');
-themeBtn.onclick=()=>{const d=document.documentElement.getAttribute('data-theme')==='dark';
-  document.documentElement.setAttribute('data-theme',d?'light':'dark');
-  ic.innerHTML=d?'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>':'<path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/>';};
-
-// hero reveal
+themeBtn.onclick=()=>{const d=document.documentElement.getAttribute('data-theme')==='dark';document.documentElement.setAttribute('data-theme',d?'light':'dark');ic.innerHTML=d?'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>':'<path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/>';};
 requestAnimationFrame(()=>document.querySelector('.hero').classList.add('in'));
-
-// odometer count-up
-function countUp(el){const to=+el.dataset.to,suf=el.querySelector('.u')?.outerHTML||'';let n=0;
-  const step=Math.max(1,Math.ceil(to/60));const t=setInterval(()=>{n+=step;if(n>=to){n=to;clearInterval(t)}
-    el.innerHTML=n.toLocaleString('fr-FR')+suf;},22);}
+function countUp(el){const to=+el.dataset.to,suf=el.querySelector('.u')?.outerHTML||'';let n=0;const step=Math.max(1,Math.ceil(to/60));const t=setInterval(()=>{n+=step;if(n>=to){n=to;clearInterval(t)}el.innerHTML=n.toLocaleString('fr-FR')+suf;},22);}
 const odoObs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){countUp(e.target);odoObs.unobserve(e.target);}}),{threshold:.5});
 document.querySelectorAll('.odo-num').forEach(e=>odoObs.observe(e));
-
-// scroll reveal + step animation
 const srObs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');srObs.unobserve(e.target);}}),{threshold:.12});
 document.querySelectorAll('.sr').forEach(e=>srObs.observe(e));
-
-const procObs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){
-  document.getElementById('stepfill').style.width='100%';
-  document.querySelectorAll('.step').forEach((s,i)=>setTimeout(()=>s.classList.add('lit'),i*260));
-  procObs.disconnect();}}),{threshold:.3});
+const procObs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){document.getElementById('stepfill').style.width='100%';document.querySelectorAll('.step').forEach((s,i)=>setTimeout(()=>s.classList.add('lit'),i*260));procObs.disconnect();}}),{threshold:.3});
 procObs.observe(document.getElementById('processus'));
-
-// FAQ
 document.querySelectorAll('.faq-q').forEach(q=>q.onclick=()=>q.parentElement.classList.toggle('open'));
-
-// vehicle filter + search
-function filterV(){const f=document.querySelector('[data-f].on').dataset.f,q=document.getElementById('vsearch').value.toLowerCase();
-  document.querySelectorAll('#vgrid .pcard').forEach(c=>{const ok=(f==='all'||c.dataset.cat===f)&&c.dataset.name.includes(q);c.style.display=ok?'':'none';});}
+function filterV(){const f=document.querySelector('[data-f].on').dataset.f,q=document.getElementById('vsearch').value.toLowerCase();document.querySelectorAll('#vgrid .pcard').forEach(c=>{c.style.display=((f==='all'||c.dataset.cat===f)&&c.dataset.name.includes(q))?'':'none';});}
 document.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-f]').forEach(x=>x.classList.remove('on'));b.classList.add('on');filterV();});
 document.getElementById('vsearch').oninput=filterV;
-
-// agri filter + search
-function filterA(){const f=document.querySelector('[data-fa].on').dataset.fa,q=document.getElementById('asearch').value.toLowerCase();
-  document.querySelectorAll('#agrid .pcard').forEach(c=>{const ok=(f==='all'||c.dataset.type===f)&&c.dataset.name.includes(q);c.style.display=ok?'':'none';});}
+function filterA(){const f=document.querySelector('[data-fa].on').dataset.fa,q=document.getElementById('asearch').value.toLowerCase();document.querySelectorAll('#agrid .pcard').forEach(c=>{c.style.display=((f==='all'||c.dataset.type===f)&&c.dataset.name.includes(q))?'':'none';});}
 document.querySelectorAll('[data-fa]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-fa]').forEach(x=>x.classList.remove('on'));b.classList.add('on');filterA();});
 document.getElementById('asearch').oninput=filterA;
-
-// form
+function filterE(){const f=document.querySelector('[data-fe].on').dataset.fe,q=document.getElementById('esearch').value.toLowerCase();document.querySelectorAll('#egrid .pcard').forEach(c=>{c.style.display=((f==='all'||c.dataset.etype===f)&&c.dataset.name.includes(q))?'':'none';});}
+document.querySelectorAll('[data-fe]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-fe]').forEach(x=>x.classList.remove('on'));b.classList.add('on');filterE();});
+document.getElementById('esearch').oninput=filterE;
 document.getElementById('cform').onsubmit=e=>{e.preventDefault();document.getElementById('fmsg').style.display='block';e.target.reset();};
 </script>
 </body>
